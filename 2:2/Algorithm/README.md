@@ -1,10 +1,10 @@
 Ders ile ilgili materyaller
 
-Video 
+######Video 
 
 [MIT Algoritmalara Giriş](http://www.acikders.org.tr/course/view.php?id=133)
 
-Makale
+######Makale
 
 [Yıldız Teknik Ders Notları](http://www.yildiz.edu.tr/~ayten/algortimaveprogramlama_bolum1-2.pdf)
 
