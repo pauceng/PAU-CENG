@@ -37,3 +37,5 @@ Ders ile ilgili materyaller
 [Tabu Arama Algoritması](http://www.ibrahimcayiroglu.com/Dokumanlar/IleriAlgoritmaAnalizi/IleriAlgoritmaAnalizi-9.Hafta-TabuAramaAlgoritmasi.pdf)
 
 [Parçacık Sürü Algoritması](http://www.ibrahimcayiroglu.com/Dokumanlar/IleriAlgoritmaAnalizi/IleriAlgoritmaAnalizi-10.Hafta-ParcacikSuruAlgoritmasi.pdf)
+
+[Clever Algorithms](http://cleveralgorithms.com/nature-inspired/index.html)
