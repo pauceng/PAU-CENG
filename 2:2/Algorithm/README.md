@@ -15,3 +15,21 @@ Ders ile ilgili materyaller
 [Bilgisayar Kavramları - Algoritmalar](http://bilgisayarkavramlari.sadievrenseker.com)
 
 [İleri Algoritma Analizi Ders Notları](https://umutzafer.wordpress.com/2012/01/27/algoritma-analizi-dersi-notlari/)
+
+[Sıralama Algoritmaları](http://www.ibrahimcayiroglu.com/Dokumanlar/IleriAlgoritmaAnalizi/IleriAlgoritmaAnalizi-4.Hafta-SiralamaAlgoritmalari.pdf)
+
+[Yapay Sinir Ağları](http://www.ibrahimcayiroglu.com/Dokumanlar/IleriAlgoritmaAnalizi/IleriAlgoritmaAnalizi-5.Hafta-YapaySinirAglari.pdf)
+
+[Greedy Method](http://www.seas.gwu.edu/~ayoussef/cs212/greedy.html#template)
+
+[Algorithms Kent State University](http://www.personal.kent.edu/~rmuhamma/Algorithms/algorithm.html)
+
+[Karınca Koloni Algoritması](http://www.ibrahimcayiroglu.com/Dokumanlar/IleriAlgoritmaAnalizi/IleriAlgoritmaAnalizi-6.Hafta-KarincaKoloni.pdf)
+
+[Genetik Algoritma](http://www.ibrahimcayiroglu.com/Dokumanlar/IleriAlgoritmaAnalizi/IleriAlgoritmaAnalizi-7.Hafta-GenetikAlgoritma.pdf)
+
+[Isıl İşlem Algoritması](http://www.ibrahimcayiroglu.com/Dokumanlar/IleriAlgoritmaAnalizi/IleriAlgoritmaAnalizi-8.Hafta-IsilislemAlgoritmasi.pdf)
+
+[Tabu Arama Algoritması](http://www.ibrahimcayiroglu.com/Dokumanlar/IleriAlgoritmaAnalizi/IleriAlgoritmaAnalizi-9.Hafta-TabuAramaAlgoritmasi.pdf)
+
+[Parçacık Sürü Algoritması](http://www.ibrahimcayiroglu.com/Dokumanlar/IleriAlgoritmaAnalizi/IleriAlgoritmaAnalizi-10.Hafta-ParcacikSuruAlgoritmasi.pdf)
