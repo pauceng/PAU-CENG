@@ -17,5 +17,5 @@ this is simple education notes for university of pamukkale bachelor of science a
 
 #####contributors
 
-[OGUZHAN TASCI](http://twitter.com/oguzhntasci)
+[oguzhan tasci](http://twitter.com/oguzhntasci)
 
