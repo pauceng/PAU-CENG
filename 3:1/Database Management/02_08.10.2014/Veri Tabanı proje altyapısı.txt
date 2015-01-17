@@ -1,0 +1,16 @@
+Uçak rezarvasyon sistemi	-
+Otobüs rezarvasyon sistemi	-
+Otomobil bakým sistemi		-
+Kütüphane bakým sistemi		-
+Hastahane otomosyan sistemi	-
+Okul otomasyon sistemi		-
+---------------------------------
+*Tablo ne olacak		-
+*TablO sahalarý ne olacak	-
+*Anahtar sahalar ne olacak	-
+---------------------------------
+sENARYOYU ÇIKAR!!
+
+
+
+Composite Key

@@ -1,0 +1,60 @@
+SALES(Dept_, Item, Volume)
+DEPT(DeptName_, Floor)
+ITEM(IName_, Type, Color)
+EMPLOYEE(ENo_, Ename_, MgrNo, Dept, Salary, JobStatus)
+SUPPLIER(SNo_, SName_)
+SUPPLY(Supplier_, Dept_, Item_, Volume)
+
+	::SORULAR::
+
+1) Oyuncak departmanýnda çalýþanlarýn isimleri.
+
+-> SELECT EName FROM EMPLOYEE WHERE Dept='Oyuncak'
+
+2) Ýkinci kattaki hiçbir departman tarafýndan satýlmayan ürünler.
+
+-> SELECT Item FROM SALES WHERE Dept IN (SELECT DName From Dept WHERE Floor<>2)
+
+3) Ýkinci kattaki departmanlar tarafýndan satýlan ürünler.
+
+-> SELECT Item FROM SALES WHERE DEPT=(SELECT DName FROM DEPT WHERE Floor=2)
+
+4) Ýkinci kattaki en az iki departman tarafýndan satýlan ürünler.
+
+-> SELECT Item FROM SALES WHERE Dept IN (SELECT DName FROM DEPT WHERE  Floor=2) and count(Dept) > 1,
+
+5) A tipinden ürün saðlayan tüm üreticilerin saðladýðý rünlerin isimlerini listeleyin.
+
+-> SELECT Item FROM SUPPLY, ITEM, SUPPLIER WHERE SUPPLY.Item=ITEM.IName AND ITEM.Type='A' AND DISTINCT COUNT(Supplier)=count(SNo)
+
+6) Kalem tedarik etmeyen tedarikçilerin isimlerini listeleyin.
+
+-> SELECT SName FROM SUPPLÝER, SUPPLY WHERE SNo=Supplier AND SUPPLY.Item <>'Kalem'
+
+7) A tipinden ürün satmayan departmanlarýn isimlerini listeleyin.
+
+-> SELECT Dept FROM SALES, ITEM WHERE SALES.Item=ITEM.IName AND ITEM.Type<>'A' 
+-> SELECT Dept FROM SALES WHERE Item=(SELECT IName FROM ITEM WHERE Type<>'A')
+
+8) Tüm ürünleri tedarik eden tedarikçi isimlerini listeleyin.
+
+
+
+9) Ýkinci kattaki ayný departmana A tipinden ürün satan SUPPLIERlarý listeleyin.
+
+
+
+10) Kendilerine saðlanan(tedarik edilen) tüm ürünleri satan departmanlarý listeleyin.
+
+
+
+11) 25000den fazla maaþ alan ayakkabý departmanýnda çalýþanlarýn isimlerini listeleyin.
+
+-> SELECT EName FROM EMPLOYEE WHERE Salary>25000 AND Dept='Ayakkabi'
+
+12) Kalem dýþýndaki ürünleri tedarik eden tedarikçilerin isimlerini listeleyin.
+
+-> SELECT SName FROM SUPPLIER WHERE SNo IN (SELECT SNO FROM SUPPLY WHERE Item_<>'Kalem')
+
+13)....
+

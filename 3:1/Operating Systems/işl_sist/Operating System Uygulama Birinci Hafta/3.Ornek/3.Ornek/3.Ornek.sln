@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Operating System Ornek 3", "Operating System Ornek 3\Operating System Ornek 3.vcproj", "{488F86AE-1DC3-4DD7-8E8A-A3A06F02963E}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Operating System Ornek 4", "Operating System Ornek 4\Operating System Ornek 4.vcproj", "{05AC7287-D7D2-4209-BEC8-E80DA77ACA7F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{488F86AE-1DC3-4DD7-8E8A-A3A06F02963E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{488F86AE-1DC3-4DD7-8E8A-A3A06F02963E}.Debug|Win32.Build.0 = Debug|Win32
+		{488F86AE-1DC3-4DD7-8E8A-A3A06F02963E}.Release|Win32.ActiveCfg = Release|Win32
+		{488F86AE-1DC3-4DD7-8E8A-A3A06F02963E}.Release|Win32.Build.0 = Release|Win32
+		{05AC7287-D7D2-4209-BEC8-E80DA77ACA7F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{05AC7287-D7D2-4209-BEC8-E80DA77ACA7F}.Debug|Win32.Build.0 = Debug|Win32
+		{05AC7287-D7D2-4209-BEC8-E80DA77ACA7F}.Release|Win32.ActiveCfg = Release|Win32
+		{05AC7287-D7D2-4209-BEC8-E80DA77ACA7F}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

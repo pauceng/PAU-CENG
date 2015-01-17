@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml" lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><meta content="en-us" name="WT.seg_1"><link rel="canonical" href="http://msdn.microsoft.com/en-us/library/938d9dz2%28v=vs.90%29.aspx">
+        <title>How to: Create and Run a CLR SQL Server Trigger</title>
+
+
+
+
+
+<meta name="DCS.dcsuri" content="/en-us/library/938d9dz2(d=default,l=en-us,v=vs.90).aspx">
+
+<meta name="NormalizedUrl" content="http://msdn.microsoft.com/en-us/library/938d9dz2(d=default,l=en-us,v=vs.90).aspx">
+
+<meta name="ms.normalizedurl" content="http://msdn.microsoft.com/en-us/library/938d9dz2(d=default,l=en-us,v=vs.90).aspx">
+
+<meta name="DCSext.ProductFamily" content="LIB_DG">
+
+<meta name="DCSext.Product" content="VS_BzApp_PTools">
+
+<meta name="DCSext.Title" content="How to: Create and Run a CLR SQL Server Trigger">
+
+<meta name="VotingContextUrl" content="http://msdn.microsoft.com/en-us/library/938d9dz2(d=default,l=en-us,v=vs.90).aspx">
+
+<meta name="MN" content="EE4293C3-12:56:02 AM">
+
+<meta name="Search.ShortId" content="938d9dz2">
+
+<meta name="ms.shortidmsdn" content="938d9dz2">
+
+<meta name="Ms.Locale" content="en-us">
+
+<meta name="ms.prodver" content="VS.90">
+
+<meta name="ms.contentlang" content="EN">
+
+<meta name="ms.lang" content="EN">
+
+<meta name="ms.loc" content="US">
+
+<meta name="ms.sitever" content="2014.12.04.2">
+
+<meta name="ms.assetid" content="96c46118-947d-492b-a336-60c3183d5832">
+
+<meta name="ms.auth" content="0">
+
+
+
+
+
+
+
+
+        
+    <link rel="stylesheet" type="text/css" href="How%20to%20%20Create%20and%20Run%20a%20CLR%20SQL%20Server%20Trigger_dosyalar/Combined.css"><script src="How%20to%20%20Create%20and%20Run%20a%20CLR%20SQL%20Server%20Trigger_dosyalar/ms2.js" async="" type="text/javascript"></script><script async="" src="How%20to%20%20Create%20and%20Run%20a%20CLR%20SQL%20Server%20Trigger_dosyalar/ai.js" type="text/javascript"></script><script class="mtps-injected">try {
+/**/
+(window.MTPS || (window.MTPS = {})).cdnDomains || (window.MTPS.cdnDomains = { 
+	"image": "http://i.msdn.microsoft.com", 
+	"js": "http://i2.msdn.microsoft.com", 
+	"css": "http://i3.msdn.microsoft.com", 
+	"xap": "http://207.46.99.216"
+});
+/**/
+} finally { MTPS._injectNextScript_0 && MTPS._injectNextScript_0(); }</script><script src="How%20to%20%20Create%20and%20Run%20a%20CLR%20SQL%20Server%20Trigger_dosyalar/jquery-1.js" class="mtps-injected"></script><script class="mtps-injected">try {
+//
+  var literalNormalizedUrl = '/en-us/library/938d9dz2(l=en-us,v=vs.90).aspx';
+  var wt_nvr_ru = 'WT_NVR_RU';
+  var wt_fpcdom = '.microsoft.com';
+  var wt_domlist = 'msdn.microsoft.com';
+  var wt_pathlist = '';
+  var wt_paramlist = 'DCSext.mtps_devcenter';
+  var wt_siteid = 'MSDN';
+  var gDomain = 'm.webtrends.com';
+  var gDcsId = 'dcsmgru7m99k7mqmgrhudo0k8_8c6m';
+  var gFpc = 'WT_FPC';
+
+
+
+  if (document.cookie.indexOf(gFpc + "=") == -1) {
+    var wtidJs = document.createElement("script");
+    wtidJs.src = "//" + gDomain + "/" + gDcsId + "/wtid.js";
+    document.getElementsByTagName("head")[0].appendChild(wtidJs);
+  }
+
+
+
+  var detectedLocale = 'en-us';
+  var wtsp = 'msdnlib_devtools_lang';
+  var gTrackEvents = '0';
+/**/
+} finally { MTPS._injectNextScript_2 && MTPS._injectNextScript_2(); }</script><script class="mtps-injected">try {
+/**/
+  var omni_guid = "6253edcf-a263-4dba-961b-92b952a5c5c6";
+/**/
+} finally { MTPS._injectNextScript_3 && MTPS._injectNextScript_3(); }</script><script class="mtps-injected">try {
+//
+
+            window.appInsightsId = '60854590-027a-4ae4-98be-2741a40f355f';
+            //
+} finally { MTPS._injectNextScript_4 && MTPS._injectNextScript_4(); }</script><script src="How%20to%20%20Create%20and%20Run%20a%20CLR%20SQL%20Server%20Trigger_dosyalar/Combined_003.js" class="mtps-injected"></script><script src="How%20to%20%20Create%20and%20Run%20a%20CLR%20SQL%20Server%20Trigger_dosyalar/SearchBox.js" class="mtps-injected"></script><script src="How%20to%20%20Create%20and%20Run%20a%20CLR%20SQL%20Server%20Trigger_dosyalar/Combined_002.js" class="mtps-injected"></script><script class="mtps-injected">try {
+MTPS = window.MTPS || {}; MTPS.LocalizedStrings = window.MTPS.LocalizedStrings || {}; MTPS.LocalizedStrings.ExpandButtonTooltip = 'Expand'; MTPS.LocalizedStrings.CollapseButtonTooltip = 'Collapse'; MTPS.LocalizedStrings.EnhancedExpandTooltip = 'Click to expand. Double-click to expand all.'; MTPS.LocalizedStrings.EnhancedCollapseTooltip = 'Click to collapse. Double-click to collapse all.'; MTPS.LocalizedStrings.ExpandAllButtonTooltip = 'Expand All'; MTPS.LocalizedStrings.CollapseAllButtonTooltip = 'Collapse All';
+} finally { MTPS._injectNextScript_8 && MTPS._injectNextScript_8(); }</script><script src="How%20to%20%20Create%20and%20Run%20a%20CLR%20SQL%20Server%20Trigger_dosyalar/jquery.js" class="mtps-injected"></script><script src="How%20to%20%20Create%20and%20Run%20a%20CLR%20SQL%20Server%20Trigger_dosyalar/Combined.js" class="mtps-injected"></script><script src="How%20to%20%20Create%20and%20Run%20a%20CLR%20SQL%20Server%20Trigger_dosyalar/broker.js"></script><script class="mtps-injected">try {
+$(document).ready(function() {
+        try {
+            var token = $("#globalRequestVerification input[name='__RequestVerificationToken']").clone();
+            $("#siteFeedbackForm").append(token);
+        } catch(err) {
+            
+        }
+    });
+} finally { MTPS._injectNextScript_11 && MTPS._injectNextScript_11(); }</script><link media="print" type="text/css" rel="stylesheet" href="How%20to%20%20Create%20and%20Run%20a%20CLR%20SQL%20Server%20Trigger_dosyalar/PrintView.css"></head>
+    <body class="library FF FF3">
+        <div id="page">
+            
+
+            
+            
+            
+    
+
+    
+    <link type="text/css" rel="stylesheet">
+    
+    <input id="isHeaderBleeding" value="true" type="hidden">
+    <div id="ux-header" dir="ltr" class="ltr msdn">
+        
+
+        <header>
+            <div class="row">
+                <div class="top mobile"></div>
+                <div class="left">
+                    <div class="siteLogo">  
+                        
+                            <a class="msdnLogoImg" href="http://msdn.microsoft.com/en-us">
+                               <img src="How%20to%20%20Create%20and%20Run%20a%20CLR%20SQL%20Server%20Trigger_dosyalar/microsoftLogoForHeader.png">
+                            </a>
+                                                             
+                        <div data-fragmentname="SiteLogo" id="Fragment_SiteLogo" xmlns="http://www.w3.org/1999/xhtml">
+  <div class="LinkWithImage topImage">
+    <a id="SiteLogo_2152_1" href="http://msdn.microsoft.com/">
+      <img id="msdnLogo-black" src="How%20to%20%20Create%20and%20Run%20a%20CLR%20SQL%20Server%20Trigger_dosyalar/dn610975.jpg" xmlns="">
+      <span></span>
+    </a>
+  </div>
+</div>    
+
+                    </div>
+                    <a id="grip" href="javascript:void(0)"></a>
+                </div>
+                
+                <div class="right desktop">
+                    <div class="auxNav">
+                        <div id="signIn">
+
+<a class="scarabLink" href="https://login.live.com/login.srf?wa=wsignin1.0&amp;rpsnv=12&amp;ct=1418633762&amp;rver=6.0.5276.0&amp;wp=MCLBI&amp;wlcxt=MSDN%24MSDN%24MSDN&amp;wreply=http%3a%2f%2fmsdn.microsoft.com%2fen-us%2flibrary%2f938d9dz2%2528v%3dvs.90%2529.aspx&amp;lc=1033&amp;id=254354&amp;mkt=en-US" title="Sign in">Sign in</a></div>
+
+    
+
+                        <div data-fragmentname="Subscriptions" id="Fragment_Subscriptions" xmlns="http://www.w3.org/1999/xhtml">
+  <a href="https://msdn.microsoft.com/subscriptions/manage/hh442900" id="Subscriptions_2153_1" xmlns="http://www.w3.org/1999/xhtml">MSDN subscriptions</a>
+</div>   
+                        <div data-fragmentname="GetTools" id="Fragment_GetTools" xmlns="http://www.w3.org/1999/xhtml">
+  <a href="http://go.microsoft.com/fwlink/?LinkId=309297&amp;clcid=0x409&amp;slcid=0x409" id="GetTools_2153_3" xmlns="http://www.w3.org/1999/xhtml">Get tools</a>
+</div>
+                        <div data-fragmentname="SocialLinks" id="Fragment_SocialLinks" xmlns="http://www.w3.org/1999/xhtml">
+  
+  <div class="linkList">
+    <ul class="links horizontal">
+      <li>
+        <a href="http://www.facebook.com/microsoftdeveloper" target="_blank" id="SocialLinks_2152_4" class="facebook" xmlns="http://www.w3.org/1999/xhtml">http://www.facebook.com/microsoftdeveloper</a>
+      </li>
+      <li>
+        <a href="https://twitter.com/msdev" target="_blank" id="SocialLinks_2152_5" class="twitter" xmlns="http://www.w3.org/1999/xhtml">https://twitter.com/msdev</a>
+      </li>
+      <li>
+        <a href="http://plus.google.com/111221966647232053570/" target="_blank" id="SocialLinks_2152_6" class="googlePlus" xmlns="http://www.w3.org/1999/xhtml">http://plus.google.com/111221966647232053570/</a>
+      </li>
+    </ul>
+  </div>
+</div> 
+                    </div>
+                    <div data-fragmentname="SearchBox" id="Fragment_SearchBox" xmlns="http://www.w3.org/1999/xhtml">
+  <div class="SearchBox">
+    <form id="HeaderSearchForm" name="HeaderSearchForm" method="get" onsubmit="return Epx.Controls.SearchBox.searchBoxOnSubmit(this);">
+      <input autocomplete="off" id="HeaderSearchTextBox" name="query" maxlength="200" onfocus="Epx.Controls.SearchBox.watermarkFocus(event, this.title)" onblur="Epx.Controls.SearchBox.watermarkBlur(event, this.title)" type="text">
+      <button title="Search MSDN" id="HeaderSearchButton" value="" type="submit" class="header-search-button"></button>
+    <div style="display: none; text-align: left; border: 1px solid buttonshadow; position: absolute; z-index: 1000; padding: 2px; background-color: rgb(255, 255, 255); color: rgb(59, 59, 59); font-family: MS Shell Dlg; font-size: 13.3333px;" id="SearchFlyoutContainer"><div id="SuggestionContainer"><ul style="list-style: outside none none; padding: 4px 2px 0px 1px; cursor: pointer; margin: 1px; white-space: nowrap;"></ul></div></div></form>
+    
+    
+  </div>
+</div> 
+                </div>
+            </div>
+       
+             <div style="display: block;" class="row" id="droor">
+                <div class="left toc">
+                    
+        <nav>
+            <ul class="navL1">
+                        <li class="inactive toggle">
+                            <a href="javascript:void(0)" title="Technologies">Technologies</a>
+                                <ul style="display: none;" class="navL2">
+                                        <li class="inactive">
+                                            <a href="http://msdn.microsoft.com/cloud-app-development-msdn" title="Cloud">Cloud</a>
+
+                                                   
+                                        </li>
+                                        <li class="inactive">
+                                            <a href="http://msdn.microsoft.com/mobile-app-development-msdn" title="Mobile">Mobile</a>
+
+                                                   
+                                        </li>
+                                        <li class="inactive">
+                                            <a href="http://msdn.microsoft.com/web-app-development-msdn" title="Web">Web</a>
+
+                                                   
+                                        </li>
+                                        <li class="inactive">
+                                            <a href="http://msdn.microsoft.com/business-and-productivity-app-development-msdn" title="Business">Business</a>
+
+                                                   
+                                        </li>
+                                        <li class="inactive">
+                                            <a href="http://msdn.microsoft.com/big-data-development-msdn" title="Data">Data</a>
+
+                                                   
+                                        </li>
+                                        <li class="inactive">
+                                            <a href="http://msdn.microsoft.com/games-development-msdn" title="Gaming">Gaming</a>
+
+                                                   
+                                        </li>
+                                </ul>
+                        </li>
+                        <li class="inactive toggle">
+                            <a href="javascript:void(0)" title="Downloads">Downloads</a>
+                                <ul style="display: none;" class="navL2">
+                                        <li class="inactive">
+                                            <a href="http://www.visualstudio.com/products/visual-studio-community-vs" title="Visual Studio">Visual Studio</a>
+
+                                                   
+                                        </li>
+                                        <li class="inactive">
+                                            <a href="http://msdn.microsoft.com/subscriptions/" title="MSDN subscriptions">MSDN subscriptions</a>
+
+                                                   
+                                        </li>
+                                        <li class="inactive">
+                                            <a href="http://msdn.microsoft.com/microsoft-sdks-msdn" title="SDKs">SDKs</a>
+
+                                                   
+                                        </li>
+                                </ul>
+                        </li>
+                        <li class="inactive toggle">
+                            <a href="javascript:void(0)" title="Programs">Programs</a>
+                                <ul style="display: none;" class="navL2">
+                                        <li class="inactive">
+                                            <a href="http://www.microsoft.com/bizspark" title="BizSpark">BizSpark</a>
+
+                                                   
+                                        </li>
+                                        <li class="inactive toggle">
+                                            <a href="javascript:void(0)" title="Students">Students</a>
+
+                                                <ul style="display: none;" class="navL3">
+                                                        <li class="inactive">
+                                                            <a href="http://msdn.microsoft.com/students-overview-msdn" title="Overview">Overview</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="http://blogs.msdn.com/b/microsoft_student_developer_blog" title="Blog">Blog</a>
+                                                        </li>
+                                                </ul>
+                                                   
+                                        </li>
+                                        <li class="inactive toggle">
+                                            <a href="javascript:void(0)" title="Architects">Architects</a>
+
+                                                <ul style="display: none;" class="navL3">
+                                                        <li class="inactive">
+                                                            <a href="http://msdn.microsoft.com/architects-overview-msdn" title="Overview">Overview</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="http://msdn.microsoft.com/architects-case-studies-msdn" title="Case studies">Case studies</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="http://msdn.microsoft.com/architects-blueprints-msdn" title="Blueprints">Blueprints</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="http://blogs.msdn.com/b/msarchitecture/" title="Blog">Blog</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="http://social.msdn.microsoft.com/forums/en-us/home?brandignore=true&amp;sort=relevancedesc&amp;searchterm=architecture+or+architect" title="Forums">Forums</a>
+                                                        </li>
+                                                </ul>
+                                                   
+                                        </li>
+                                        <li class="inactive">
+                                            <a href="http://events.msdn.microsoft.com/" title="Events">Events</a>
+
+                                                   
+                                        </li>
+                                </ul>
+                        </li>
+                        <li class="inactive toggle">
+                            <a href="javascript:void(0)" title="Community">Community</a>
+                                <ul style="display: none;" class="navL2">
+                                        <li class="inactive">
+                                            <a href="https://social.msdn.microsoft.com/forums/" title="Forums">Forums</a>
+
+                                                   
+                                        </li>
+                                        <li class="inactive">
+                                            <a href="http://blogs.msdn.com/b/developer-tools/" title="Blogs">Blogs</a>
+
+                                                   
+                                        </li>
+                                        <li class="inactive">
+                                            <a href="http://tech-advisors.msdn.microsoft.com/en-us" title="Tech Advisors">Tech Advisors</a>
+
+                                                   
+                                        </li>
+                                        <li class="inactive">
+                                            <a href="http://channel9.msdn.com/" title="Channel 9">Channel 9</a>
+
+                                                   
+                                        </li>
+                                </ul>
+                        </li>
+                        <li class="inactive current toggle">
+                            <a href="javascript:void(0)" title="Documentation">Documentation</a>
+                                <ul style="display: none;" class="navL2">
+                                        <li class="inactive current">
+                                            <a href="http://msdn.microsoft.com/library/" title="APIs and reference">APIs and reference</a>
+
+                                                   
+                                        </li>
+                                        <li class="inactive">
+                                            <a href="http://msdn.microsoft.com/developer-centers-msdn" title="Dev centers">Dev centers</a>
+
+                                                   
+                                        </li>
+                                </ul>
+                        </li>
+                        <li class="inactive">
+                            <a href="https://code.msdn.microsoft.com/" title="Samples">Samples</a>
+                        </li>
+            </ul>
+        </nav>
+                
+                </div>
+                <div class="right mobile"></div>
+                
+                <span id="singleCol"></span>
+                <span id="doubleCol"></span>
+             </div>
+        </header>
+    </div>
+    
+    
+
+        
+    <div class="printExportMenus ltr">
+        <a style="display: inline;" id="isd_printABook" href="http://msdn.microsoft.com/en-us/library/export/help/?returnUrl=%2fen-us%2flibrary%2f938d9dz2%28v%3dvs.90%29.aspx">
+            Export (<span class="count">0</span>)
+        </a>
+        <a id="isd_print" href="http://msdn.microsoft.com/en-us/library/938d9dz2%28d=printer,v=vs.90%29.aspx" rel="nofollow">
+            Print 
+        </a>
+    </div>
+    
+
+        <div class="printExportMenus ltr">
+        <a id="expandCollapseAll" accesskey="e" href="javascript:void(0)" title="Expand/Collapse all sections by pressing Ctrl + Shift + e">Collapse All</a>
+    </div>
+
+    
+
+
+            <div id="body">
+                
+
+
+
+
+
+
+
+
+    <div style="width: 280px; max-width: 480px; min-height: 4121px; height: 881px;" id="leftNav">
+
+
+
+<div style="width: 280px; position: fixed; top: -267px;" id="tocnav">
+
+            <div style="padding-left: 0px;" class="toclevel0" data-toclevel="0">
+<a class="toc_collapsed" href="#"></a><a data-tochassubtree="true" href="http://msdn.microsoft.com/en-us/library/ms123401.aspx" id="ms310241_MSDN.10_en-us" mtpsaliasid="" mtpsassetid="5DDC0A78-6B2C-43E3-9C56-55F45C0DFFA5_MSDN.10_en-us" mtpsshortid="ms123401_MSDN.10_en-us" title="MSDN Library">MSDN Library</a>            </div>
+            <div style="padding-left: 0px;" class="toclevel0" data-toclevel="0">
+<a class="toc_collapsed" href="#"></a><a data-tochassubtree="true" href="http://msdn.microsoft.com/en-us/library/aa187916.aspx" id="aa187916_MSDN.10_en-us" mtpsaliasid="" mtpsassetid="MSDN|devtoolslang|$\devtoolslang.hxt@0,0_MSDN.10_en-us" mtpsshortid="aa187916_MSDN.10_en-us" title="Development Tools and Languages">Development Tools and Languages</a>            </div>
+            <div style="padding-left: 0px;" class="toclevel0" data-toclevel="0">
+<a class="toc_collapsed" href="#"></a><a data-tochassubtree="true" href="http://msdn.microsoft.com/en-us/library/aa139594.aspx" id="aa139594_MSDN.10_en-us" mtpsaliasid="" mtpsassetid="MSDN|devtoolslang|$\devtoolslang.hxt@0,0,4_MSDN.10_en-us" mtpsshortid="aa139594_MSDN.10_en-us" title="Visual Studio 2008">Visual Studio 2008</a>            </div>
+            <div style="padding-left: 0px;" class="toclevel0" data-toclevel="0">
+<a class="toc_collapsed" href="#"></a><a data-tochassubtree="true" href="http://msdn.microsoft.com/en-us/library/52f3sw5c%28v=vs.90%29.aspx" id="aa139595_MSDN.10_en-us" mtpsaliasid="" mtpsassetid="06ddebea-2c83-4a45-bb48-6264c797ed93_MSDN.10_en-us" mtpsshortid="52f3sw5c_VS.90_en-us" title="Visual Studio">Visual Studio</a>            </div>
+            <div style="padding-left: 0px;" class="toclevel0" data-toclevel="0">
+<a class="toc_collapsed" href="#"></a><a data-tochassubtree="true" href="http://msdn.microsoft.com/en-us/library/k1s94fta%28v=vs.90%29.aspx" id="hh583636_VS.90_en-us" mtpsaliasid="" mtpsassetid="f3f63195-82c6-48e8-a4a0-612810e7d093_VS.90_en-us" mtpsshortid="k1s94fta_VS.90_en-us" title=".NET Framework Programming in Visual Studio">.NET Framework Programming in Visual Studio</a>            </div>
+            <div style="padding-left: 0px;" class="toclevel0" data-toclevel="0">
+<a class="toc_collapsed" href="#"></a><a data-tochassubtree="true" href="http://msdn.microsoft.com/en-us/library/wzabh8c4%28v=vs.90%29.aspx" id="hh600487_VS.90_en-us" mtpsaliasid="" mtpsassetid="9812a6d5-23d2-4427-8b98-70a2abfec3bc_VS.90_en-us" mtpsshortid="wzabh8c4_VS.90_en-us" title="Accessing Data">Accessing Data</a>            </div>
+            <div data-childrenloaded="true" style="padding-left: 17px;" class="toclevel1" data-toclevel="1">
+<a class="toc_expanded" href="#"></a><a data-tochassubtree="true" href="http://msdn.microsoft.com/en-us/library/6s0s2at1%28v=vs.90%29.aspx" id="hh570868_VS.90_en-us" mtpsaliasid="" mtpsassetid="5358a825-e19b-49aa-8214-674ce5fed1da_VS.90_en-us" mtpsshortid="6s0s2at1_VS.90_en-us" title="Creating SQL Server 2005 Objects in Managed Code">Creating SQL Server 2005 Objects in Managed Code</a>            </div>
+            <div style="padding-left: 34px;" class="toclevel2" data-toclevel="2">
+<span class="toc_empty"></span><a href="http://msdn.microsoft.com/en-us/library/c8dbfz8s%28v=vs.90%29.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="SQL Server Projects">SQL Server Projects</a>            </div>
+            <div style="padding-left: 34px;" class="toclevel2" data-toclevel="2">
+<span class="toc_empty"></span><a href="http://msdn.microsoft.com/en-us/library/k2e1fb36%28v=vs.90%29.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="Advantages of Using Managed Code to Create Database Objects">Advantages of Using Managed Code to Create Database Objects</a>            </div>
+            <div style="padding-left: 34px;" class="toclevel2" data-toclevel="2">
+<span class="toc_empty"></span><a href="http://msdn.microsoft.com/en-us/library/z28bh0b5%28v=vs.90%29.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="Attributes for SQL Server Projects and Database Objects">Attributes for SQL Server Projects and Database Objects</a>            </div>
+            <div style="padding-left: 34px;" class="toclevel2" data-toclevel="2">
+<span class="toc_empty"></span><a href="http://msdn.microsoft.com/en-us/library/84b1se47%28v=vs.90%29.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="How to: Create a SQL Server Project">How to: Create a SQL Server Project</a>            </div>
+            <div style="padding-left: 34px;" class="toclevel2" data-toclevel="2">
+<span class="toc_empty"></span><a href="http://msdn.microsoft.com/en-us/library/dahcx0ww%28v=vs.90%29.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="How to: Deploy SQL Server Project Items to a SQL Server">How to: Deploy SQL Server Project Items to a SQL Server</a>            </div>
+            <div style="padding-left: 34px;" class="toclevel2" data-toclevel="2">
+<span class="toc_empty"></span><a href="http://msdn.microsoft.com/en-us/library/5czye81z%28v=vs.90%29.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="How to: Create and Run a CLR SQL Server Stored Procedure">How to: Create and Run a CLR SQL Server Stored Procedure</a>            </div>
+            <div style="padding-left: 34px;" class="toclevel2" data-toclevel="2">
+<span class="toc_empty"></span><a href="http://msdn.microsoft.com/en-us/library/91e6taax%28v=vs.90%29.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="How to: Create and Run a CLR SQL Server Aggregate">How to: Create and Run a CLR SQL Server Aggregate</a>            </div>
+            <div style="padding-left: 34px;" class="toclevel2 current" data-toclevel="2">
+<span class="toc_empty"></span><a href="http://msdn.microsoft.com/en-us/library/938d9dz2%28v=vs.90%29.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="How to: Create and Run a CLR SQL Server Trigger">How to: Create and Run a CLR SQL Server Trigger</a>            </div>
+            <div style="padding-left: 34px;" class="toclevel2" data-toclevel="2">
+<span class="toc_empty"></span><a href="http://msdn.microsoft.com/en-us/library/w2kae45k%28v=vs.90%29.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="How to: Create and Run a CLR SQL Server User-Defined Function">How to: Create and Run a CLR SQL Server User-Defined Function</a>            </div>
+            <div style="padding-left: 34px;" class="toclevel2" data-toclevel="2">
+<span class="toc_empty"></span><a href="http://msdn.microsoft.com/en-us/library/a8s4s5dz%28v=vs.90%29.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="How to: Create and Run a CLR SQL Server User-Defined Type">How to: Create and Run a CLR SQL Server User-Defined Type</a>            </div>
+            <div style="padding-left: 34px;" class="toclevel2" data-toclevel="2">
+<span class="toc_empty"></span><a href="http://msdn.microsoft.com/en-us/library/ms233682%28v=vs.90%29.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="How to: Edit the Test.sql Script to Run SQL Objects">How to: Edit the Test.sql Script to Run SQL Objects</a>            </div>
+            <div style="padding-left: 34px;" class="toclevel2" data-toclevel="2">
+<span class="toc_empty"></span><a href="http://msdn.microsoft.com/en-us/library/eaf9k1as%28v=vs.90%29.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="Item Templates for SQL Server Projects">Item Templates for SQL Server Projects</a>            </div>
+            <div style="padding-left: 34px;" class="toclevel2" data-toclevel="2">
+<span class="toc_empty"></span><a href="http://msdn.microsoft.com/en-us/library/ms233761%28v=vs.90%29.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="How to: Deploy SQL Server Project Items in Referenced Assemblies">How to: Deploy SQL Server Project Items in Referenced Assemblies</a>            </div>
+            <div style="padding-left: 34px;" class="toclevel2" data-toclevel="2">
+<span class="toc_empty"></span><a href="http://msdn.microsoft.com/en-us/library/zxsa8hkf%28v=vs.90%29.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="Walkthrough: Creating a Stored Procedure in Managed Code">Walkthrough: Creating a Stored Procedure in Managed Code</a>            </div>
+</div>
+        
+
+        
+
+        
+        
+        <div id="toc-resizable-ew" class="toc-resizable-ew"></div>
+        
+
+<a style="left: 280px; display: inline-block;" id="NavigationResize" href="javascript:void(0)">
+    <img style="" class="cl_nav_resize_open" src="How%20to%20%20Create%20and%20Run%20a%20CLR%20SQL%20Server%20Trigger_dosyalar/ImageSprite.png" title="Expand" alt="Expand">
+    <img style="display: none;" class="cl_nav_resize_close" src="How%20to%20%20Create%20and%20Run%20a%20CLR%20SQL%20Server%20Trigger_dosyalar/ImageSprite.png" title="Minimize" alt="Minimize">
+</a>
+
+
+
+    </div>
+<div style="margin-left: 280px; width: auto;" id="content" class="content">
+
+
+
+
+
+    
+    <div id="FeedbackCounterUrl" data-url="/en-us/library/feedbackcounterasync/938d9dz2(v=vs.90).aspx"></div>
+    <div id="FeedbackCounterPlaceHolder"><link rel="stylesheet" type="text/css" href="How%20to%20%20Create%20and%20Run%20a%20CLR%20SQL%20Server%20Trigger_dosyalar/FeedbackCounter.css" xmlns="http://www.w3.org/1999/xhtml">
+    
+    
+
+    
+
+    
+</div>
+
+
+        
+<div xmlns="http://www.w3.org/1999/xhtml">
+  
+  <div class="topic" xmlns="http://www.w3.org/1999/xhtml" xmlns:mtps="http://msdn2.microsoft.com/mtps" xmlns:msxsl="urn:schemas-microsoft-com:xslt" xmlns:cs="http://msdn.microsoft.com/en-us/">
+    <h1 class="title">How to: Create and Run a CLR SQL Server Trigger</h1>
+    
+    <div class="lw_vs">
+      <div id="curversion">
+        <strong>
+            .NET Framework 3.5
+        </strong>
+      </div>
+      <div id="versionclick">
+        <div id="vsseperator" class="cl_lw_vs_seperator"></div>
+        <div>
+          <div>
+            <a id="vsLink" href="javascript:;">
+                        Other Versions
+                    </a>
+          </div>
+          <div class="cl_vs_arrow clip10x10">
+            <img class="cl_lw_vs_arrow" id="vsArrow" alt="" src="How%20to%20%20Create%20and%20Run%20a%20CLR%20SQL%20Server%20Trigger_dosyalar/ImageSprite.png">
+          </div>
+        </div>
+        <ul style="display: none;" id="vsPanel">
+          <li>
+            <a href="http://msdn.microsoft.com/en-us/library/938d9dz2%28v=vs.100%29.aspx">Visual Studio 2010</a>
+          </li>
+          <li>
+            <a href="http://msdn.microsoft.com/en-us/library/938d9dz2%28v=vs.80%29.aspx">.NET Framework 2.0</a>
+          </li>
+        </ul>
+      </div>
+    <div id="ratingCounterSeperator" class="cl_lw_vs_seperator" style="display: block;" xmlns="http://www.w3.org/1999/xhtml"></div><div style="margin: 0px 0px 0px 13px; display: block;" id="ratingCounter" xmlns="http://www.w3.org/1999/xhtml">
+        <span id="rcA" class="ratingText">
+            2 out of 2 rated this helpful <span id="rateThisPrefix">- </span><a id="rateThisTopic" href="#feedback" title="Rate this topic">Rate this topic</a>
+            
+        </span>
+    </div></div>
+    <div style="clear:both;"></div>
+    
+    <div id="mainSection"> <div id="mainBody">   <p></p> <div class="introduction"><p>Create a SQL trigger by adding a <span class="label">Trigger</span>
+ item to a SQL server project. After successful deployment, triggers 
+created in managed code are called and executed like any other T-SQL 
+trigger. Triggers written in a managed language can use the 
+SqlTriggerContext class to obtain access to the same information that is
+ available to T-SQL triggers. </p><div class="alert"><table><tbody><tr><th align="left"><img id="alert_note" alt="Note" src="How%20to%20%20Create%20and%20Run%20a%20CLR%20SQL%20Server%20Trigger_dosyalar/clear.gif" title="Note" xmlns="" class="cl_IC101471"><strong>Note:</strong></th></tr><tr><td><p>By
+ default, the common language runtime (CLR) integration feature is off 
+in Microsoft SQL Server and must be enabled in order to use SQL Server 
+project items. To enable CLR integration, use the <strong>clr enabled</strong> option of the <strong>sp_configure</strong> stored procedure. For more information, see <a href="http://msdn.microsoft.com/en-us/library/ms131048.aspx">Enabling CLR Integration</a>.</p></td></tr></tbody></table></div> <div class="alert"><table><tbody><tr><th align="left"><img id="alert_note" alt="Note" src="How%20to%20%20Create%20and%20Run%20a%20CLR%20SQL%20Server%20Trigger_dosyalar/clear.gif" title="Note" xmlns="" class="cl_IC101471"><strong>Note:</strong></th></tr><tr><td> <p>Your
+ computer might show different names or locations for some of the Visual
+ Studio user interface elements in the following instructions. The 
+Visual Studio edition that you have and the settings that you use 
+determine these elements. For more information, see <span><a href="http://msdn.microsoft.com/en-us/library/zbhkx167%28v=vs.90%29.aspx">Visual Studio Settings</a></span>.</p> </td></tr></tbody></table></div> </div><div><h2 class="LW_CollapsibleArea_TitleDiv"><div><a href="javascript:void(0)" class="LW_CollapsibleArea_TitleAhref" title="Click to collapse. Double-click to collapse all." role="button"><span class="cl_CollapsibleArea_expanding LW_CollapsibleArea_Img"></span><span class="LW_CollapsibleArea_Title">Creating the SQL Server Trigger</span></a><div class="LW_CollapsibleArea_HrDiv"><hr class="LW_CollapsibleArea_Hr"></div></div></h2><div class="sectionblock"><a id="sectionToggle0"></a><h3 class="procedureSubHeading">To create a SQL Server Trigger</h3><div class="subSection"><ol><li><p>Open an existing <span class="label">SQL Server Project</span>, or create a new one. For more information, see <span><a href="http://msdn.microsoft.com/en-us/library/84b1se47%28v=vs.90%29.aspx">How to: Create a SQL Server Project</a></span>.</p></li><li><p>From the <span class="label">Project</span> menu, select <span class="label">Add New Item</span>.</p></li><li><p>Select <span class="label">Trigger</span> in the <span><a href="http://msdn.microsoft.com/en-us/library/74d99cwb%28v=vs.90%29.aspx">Add New Item Dialog Box</a></span>.</p></li><li><p>Type a <span class="label">Name</span> for the new trigger.</p></li><li><p>Add code to run when the trigger is executed. See the first example that follows this procedure.</p><div class="alert"><table><tbody><tr><th align="left"><img id="alert_note" alt="Note" src="How%20to%20%20Create%20and%20Run%20a%20CLR%20SQL%20Server%20Trigger_dosyalar/clear.gif" title="Note" xmlns="" class="cl_IC101471"><strong>Note:</strong></th></tr><tr><td><p>C++ examples must be compiled with the /clr:safe compiler option.</p></td></tr></tbody></table></div></li><li><p>For Visual Basic and Visual C#, in <span class="label">Solution Explorer</span>, open the <span class="label">TestScripts</span> folder and double-click the <span class="label">Test.sql</span> file.</p><p>For Visual C++, in <span class="label">Solution Explorer</span>, double-click the <span class="label">debug.sql</span> file.</p></li><li><p>Add code to the <span class="label">Test.sql</span> (<span class="label">debug.sql</span> in Visual C++) file to execute the trigger. See the second example that follows this procedure.</p></li><li><p>Press <span class="label">F5</span> to build, deploy, and debug the trigger. For information about deploying without debugging, see <span><a href="http://msdn.microsoft.com/en-us/library/dahcx0ww%28v=vs.90%29.aspx">How to: Deploy SQL Server Project Items to a SQL Server</a></span>.</p></li><li><p>View the results that are shown in the <span><a href="http://msdn.microsoft.com/en-us/library/3hk6fby3%28v=vs.90%29.aspx">Output Window</a></span> and select <span class="label">Show output from: Database Output</span>.</p></li></ol></div></div></div><div><h2 class="LW_CollapsibleArea_TitleDiv"><div><a href="javascript:void(0)" class="LW_CollapsibleArea_TitleAhref" title="Click to collapse. Double-click to collapse all." role="button"><span class="cl_CollapsibleArea_expanding LW_CollapsibleArea_Img"></span><span class="LW_CollapsibleArea_Title">Example</span></a><div class="LW_CollapsibleArea_HrDiv"><hr class="LW_CollapsibleArea_Hr"></div></div></h2><div class="sectionblock"><a id="exampleToggle"></a><p>This
+ example demonstrates the scenario where the users choose any user name 
+they want, but you want to know which users entered an e-mail address as
+ a user name. This trigger detects that information and logs it to an 
+audit table.</p><div>
+<div id="code-snippet-1" class="codeSnippetContainer" xmlns="">
+    <div class="codeSnippetContainerTabs">
+        <div class="codeSnippetContainerTabActive" dir="ltr"><a>C#</a></div><div class="codeSnippetContainerTab" dir="ltr"><a href="http://msdn.microsoft.com/en-us/library/938d9dz2%28v=vs.90%29.aspx?cs-save-lang=1&amp;cs-lang=vb#code-snippet-1">VB</a></div>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+                <a name="CodeSnippetCopyLink" style="display: none;" title="Copy to clipboard." href="javascript:if%20(window.epx.codeSnippet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_a45b91ac-3dff-461f-844b-304b51a30f7a');">Copy</a>
+            </div>
+        </div>
+        <div id="CodeSnippetContainerCode_a45b91ac-3dff-461f-844b-304b51a30f7a" class="codeSnippetContainerCode" dir="ltr">
+            <div style="color:Black;"><pre><span style="color:Blue;">using</span> System.Data.SqlClient;
+<span style="color:Blue;">using</span> System.Text.RegularExpressions;
+<span style="color:Blue;">using</span> Microsoft.SqlServer.Server;
+
+<span style="color:Blue;">public</span>&nbsp;<span style="color:Blue;">partial</span>&nbsp;<span style="color:Blue;">class</span> Triggers
+{
+    [SqlTrigger(Name=<span style="color:#A31515;">"UserNameAudit"</span>, Target=<span style="color:#A31515;">"Users"</span>, Event=<span style="color:#A31515;">"FOR INSERT"</span>)]
+    <span style="color:Blue;">public</span>&nbsp;<span style="color:Blue;">static</span>&nbsp;<span style="color:Blue;">void</span> UserNameAudit()
+    {
+        SqlTriggerContext triggContext = SqlContext.TriggerContext;
+        SqlParameter userName = <span style="color:Blue;">new</span> SqlParameter(<span style="color:#A31515;">"@username"</span>, System.Data.SqlDbType.NVarChar);
+
+        <span style="color:Blue;">if</span> (triggContext.TriggerAction == TriggerAction.Insert)
+        {
+            <span style="color:Blue;">using</span> (SqlConnection conn = <span style="color:Blue;">new</span> SqlConnection(<span style="color:#A31515;">"context connection=true"</span>))
+            {
+                conn.Open();
+                SqlCommand sqlComm = <span style="color:Blue;">new</span> SqlCommand();
+                SqlPipe sqlP = SqlContext.Pipe;
+
+                sqlComm.Connection = conn;
+                sqlComm.CommandText = <span style="color:#A31515;">"SELECT UserName from INSERTED"</span>;
+
+                userName.Value = sqlComm.ExecuteScalar().ToString();
+
+                <span style="color:Blue;">if</span> (IsEMailAddress(userName.Value.ToString()))
+                {
+                    sqlComm.Parameters.Add(userName);
+                    sqlComm.CommandText = <span style="color:#A31515;">"INSERT UsersAudit(UserName) VALUES(@username)"</span>;
+                    sqlP.Send(sqlComm.CommandText);
+                    sqlP.ExecuteAndSend(sqlComm);
+                }
+            }
+        }
+    }
+
+
+    <span style="color:Blue;">public</span>&nbsp;<span style="color:Blue;">static</span>&nbsp;<span style="color:Blue;">bool</span> IsEMailAddress(<span style="color:Blue;">string</span> s)
+    {
+        <span style="color:Blue;">return</span> Regex.IsMatch(s, <span style="color:#A31515;">"^([\\w-]+\\.)*?[\\w-]+@[\\w-]+\\.([\\w-]+\\.)*?[\\w]+$"</span>);
+    }
+}
+</pre></div>
+            
+        </div>
+    </div>
+</div>
+</div><div>
+<div id="code-snippet-2" class="codeSnippetContainer" xmlns="">
+    <div class="codeSnippetContainerTabs">
+        <div class="codeSnippetContainerTabSingle" dir="ltr"><a>C++</a></div>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+                <a name="CodeSnippetCopyLink" style="display: none;" title="Copy to clipboard." href="javascript:if%20(window.epx.codeSnippet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_f167ef9f-2faf-464b-8e6e-d7a60f95d91c');">Copy</a>
+            </div>
+        </div>
+        <div id="CodeSnippetContainerCode_f167ef9f-2faf-464b-8e6e-d7a60f95d91c" class="codeSnippetContainerCode" dir="ltr">
+            <div style="color:Black;"><pre>#include <span style="color:#A31515;">"stdafx.h"</span>
+
+#<span style="color:Blue;">using</span> &lt;System.dll&gt;
+#<span style="color:Blue;">using</span> &lt;System.Data.dll&gt;
+#<span style="color:Blue;">using</span> &lt;System.Xml.dll&gt;
+
+<span style="color:Blue;">using</span>&nbsp;<span style="color:Blue;">namespace</span> System;
+<span style="color:Blue;">using</span>&nbsp;<span style="color:Blue;">namespace</span> System::Data;
+<span style="color:Blue;">using</span>&nbsp;<span style="color:Blue;">namespace</span> System::Data::Sql;
+<span style="color:Blue;">using</span>&nbsp;<span style="color:Blue;">namespace</span> System::Data::SqlClient;
+<span style="color:Blue;">using</span>&nbsp;<span style="color:Blue;">namespace</span> System::Data::SqlTypes;
+<span style="color:Blue;">using</span>&nbsp;<span style="color:Blue;">namespace</span> System::Text::RegularExpressions;
+<span style="color:Blue;">using</span>&nbsp;<span style="color:Blue;">namespace</span> Microsoft::SqlServer::Server;
+
+<span style="color:Green;">// In order to debug your Trigger, add the following to your debug.sql file:&nbsp;</span>
+<span style="color:Green;">//&nbsp;</span>
+<span style="color:Green;">// -- Insert one user name that is not an e-mail address and one that is&nbsp;</span>
+<span style="color:Green;">// INSERT INTO Users(UserName, Pass) VALUES(N'someone', N'cnffjbeq')&nbsp;</span>
+<span style="color:Green;">// INSERT INTO Users(UserName, Pass) VALUES(N'someone@example.com', N'cnffjbeq')&nbsp;</span>
+<span style="color:Green;">//&nbsp;</span>
+<span style="color:Green;">// -- check the Users and UsersAudit tables to see the results of the trigger&nbsp;</span>
+<span style="color:Green;">// SELECT * FROM Users&nbsp;</span>
+<span style="color:Green;">// SELECT * FROM UsersAudit&nbsp;</span>
+<span style="color:Green;">//&nbsp;</span>
+
+<span style="color:Blue;">public</span>&nbsp;ref&nbsp;<span style="color:Blue;">class</span> AddNewTrigger
+{
+<span style="color:Blue;">public</span>:
+    [SqlTrigger(Name=<span style="color:#A31515;">"UserNameAudit"</span>, Target=<span style="color:#A31515;">"Users"</span>, Event=<span style="color:#A31515;">"FOR INSERT"</span>)]
+    <span style="color:Blue;">static</span>&nbsp;<span style="color:Blue;">void</span> UserNameAudit()
+    {
+        SqlTriggerContext ^triggContext = SqlContext::TriggerContext;
+        SqlParameter ^userName = <span style="color:Blue;">gcnew</span> SqlParameter(<span style="color:#A31515;">"@username"</span>, System::Data::SqlDbType::NVarChar);
+
+        <span style="color:Blue;">if</span> (triggContext-&gt;TriggerAction == TriggerAction::Insert)
+        {
+            SqlConnection ^conn = <span style="color:Blue;">gcnew</span> SqlConnection(<span style="color:#A31515;">"context connection=true"</span>);
+            conn-&gt;Open();
+            SqlCommand ^sqlComm = <span style="color:Blue;">gcnew</span> SqlCommand();
+            SqlPipe ^sqlP = SqlContext::Pipe;
+
+            sqlComm-&gt;Connection = conn;
+            sqlComm-&gt;CommandText = <span style="color:#A31515;">"SELECT UserName from INSERTED"</span>;
+
+            userName-&gt;Value = sqlComm-&gt;ExecuteScalar()-&gt;ToString();
+
+            <span style="color:Blue;">if</span> (IsEMailAddress(userName-&gt;ToString()))
+            {
+                sqlComm-&gt;CommandText = <span style="color:#A31515;">"INSERT UsersAudit(UserName) VALUES(userName)"</span>;
+                sqlP-&gt;Send(sqlComm-&gt;CommandText);
+                sqlP-&gt;ExecuteAndSend(sqlComm);
+            }
+
+            conn-&gt;Close();
+        }
+    }
+
+    <span style="color:Blue;">static</span>&nbsp;<span style="color:Blue;">bool</span> IsEMailAddress(String ^s)
+    {
+        <span style="color:Blue;">return</span> Regex::IsMatch(s, <span style="color:#A31515;">"^([\\w-]+\\.)*?[\\w-]+@[\\w-]+\\.([\\w-]+\\.)*?[\\w]+$"</span>);
+    }
+};
+</pre></div>
+            
+        </div>
+    </div>
+</div>
+</div><p>Add code to execute and test your trigger to the Test.sql 
+(debug.sql in Visual C++) file in the TestScripts folder in your 
+project. For example, if you deployed a trigger, you can test it by 
+running a script that inserts a new row into the table on which the 
+trigger is set causing the trigger to fire. The following debugging code
+ assumes that two tables exist with the following definitions:</p><p><span class="code">CREATE TABLE Users</span></p><p><span class="code">(</span></p><p><span class="code">    UserName    NVARCHAR(200)    NOT NULL,</span></p><p><span class="code">    Pass    NVARCHAR(200)    NOT NULL</span></p><p><span class="code">)</span></p><p><span class="code">CREATE TABLE UsersAudit</span></p><p><span class="code">(</span></p><p><span class="code">    UserName    NVARCHAR(200)    NOT NULL</span></p><p><span class="code">)</span></p>
+<div id="code-snippet-3" class="codeSnippetContainer" xmlns="">
+    <div class="codeSnippetContainerTabs">
+        
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+                <a name="CodeSnippetCopyLink" style="display: none;" title="Copy to clipboard." href="javascript:if%20(window.epx.codeSnippet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_58f1f23b-2e42-40ae-877b-74d1d561f63b');">Copy</a>
+            </div>
+        </div>
+        <div id="CodeSnippetContainerCode_58f1f23b-2e42-40ae-877b-74d1d561f63b" class="codeSnippetContainerCode" dir="ltr">
+            <div style="color:Black;"><pre>-- Insert one user name that is not an e-mail address and one that is
+INSERT INTO Users(UserName, Pass) VALUES(N'someone', N'cnffjbeq')
+INSERT INTO Users(UserName, Pass) VALUES(N'someone@example.com', N'cnffjbeq')
+
+-- check the Users and UsersAudit tables to see the results of the trigger
+select * from Users
+select * from UsersAudit
+</pre></div>
+            
+        </div>
+    </div>
+</div>
+</div></div><div><h2 class="LW_CollapsibleArea_TitleDiv"><div><a href="javascript:void(0)" class="LW_CollapsibleArea_TitleAhref" title="Click to collapse. Double-click to collapse all." role="button"><span class="cl_CollapsibleArea_expanding LW_CollapsibleArea_Img"></span><span class="LW_CollapsibleArea_Title">See Also</span></a><div class="LW_CollapsibleArea_HrDiv"><hr class="LW_CollapsibleArea_Hr"></div></div></h2><div class="sectionblock"><a id="seeAlsoToggle"></a><h4 class="subHeading">Tasks</h4><div class="seeAlsoStyle"><span><a href="http://msdn.microsoft.com/en-us/library/84b1se47%28v=vs.90%29.aspx">How to: Create a SQL Server Project</a></span></div><div class="seeAlsoStyle"><span><a href="http://msdn.microsoft.com/en-us/library/5czye81z%28v=vs.90%29.aspx">How to: Create and Run a CLR SQL Server Stored Procedure</a></span></div><div class="seeAlsoStyle"><span><a href="http://msdn.microsoft.com/en-us/library/938d9dz2%28v=vs.90%29.aspx">How to: Create and Run a CLR SQL Server Trigger</a></span></div><div class="seeAlsoStyle"><span><a href="http://msdn.microsoft.com/en-us/library/91e6taax%28v=vs.90%29.aspx">How to: Create and Run a CLR SQL Server Aggregate</a></span></div><div class="seeAlsoStyle"><span><a href="http://msdn.microsoft.com/en-us/library/w2kae45k%28v=vs.90%29.aspx">How to: Create and Run a CLR SQL Server User-Defined Function</a></span></div><div class="seeAlsoStyle"><span><a href="http://msdn.microsoft.com/en-us/library/a8s4s5dz%28v=vs.90%29.aspx">How to: Create and Run a CLR SQL Server User-Defined Type</a></span></div><div class="seeAlsoStyle"><span><a href="http://msdn.microsoft.com/en-us/library/zxsa8hkf%28v=vs.90%29.aspx">Walkthrough: Creating a Stored Procedure in Managed Code</a></span></div><div class="seeAlsoStyle"><span><a href="http://msdn.microsoft.com/en-us/library/ms165051%28v=vs.90%29.aspx">How to: Debug a SQL CLR Stored Procedure</a></span></div><h4 class="subHeading">Concepts</h4><div class="seeAlsoStyle"><span><a href="http://msdn.microsoft.com/en-us/library/ms254498%28v=vs.90%29.aspx">Introduction to SQL Server CLR Integration (ADO.NET)</a></span></div><div class="seeAlsoStyle"><span><a href="http://msdn.microsoft.com/en-us/library/k2e1fb36%28v=vs.90%29.aspx">Advantages of Using Managed Code to Create Database Objects</a></span></div><div class="seeAlsoStyle"><span><a href="http://msdn.microsoft.com/en-us/library/eaf9k1as%28v=vs.90%29.aspx">Item Templates for SQL Server Projects</a></span></div><h4 class="subHeading">Reference</h4><div class="seeAlsoStyle"><span><a href="http://msdn.microsoft.com/en-us/library/z28bh0b5%28v=vs.90%29.aspx">Attributes for SQL Server Projects and Database Objects</a></span></div><h4 class="subHeading">Other Resources</h4><div class="seeAlsoStyle"><span><a href="http://msdn.microsoft.com/en-us/library/ms165050%28v=vs.90%29.aspx">SQL CLR Database Debugging</a></span></div></div></div></div>  </div>
+  </div>
+</div>
+
+    
+
+
+
+<script id="CommentTemplate" type="text/x-jquery-tmpl">
+    <div class="communityContentAnnotation">
+        <a name="${Index}"></a>
+        <h3>
+            ${Title}
+        </h3>
+        <div class="communityContentAnnotationBody">
+            {{html Body}}
+        </div>
+        <div class="communityContentAnnotationInfo">
+            <div class="communityContentAnnotationAvatarContainer">
+                <a href="${UserAvatar.Href}" title="${UserAvatar.ToolTip}" class="communityContentAnnotationAvatar"><img src="${UserAvatar.ImageUrl}" alt="${UserAvatar.ImageAltText}" width="34" height="34" /></a>
+            </div>
+            <div class="communityContentAnnotationUserDateContainer">
+                <div class="communityContentAnnotationUserContainer">
+                    <a href="${UserAvatar.Href}">
+                        ${User}
+                    </a>
+                </div>
+                <div class="communityContentAnnotationDateContainer">
+                    <span>${Date}</span>
+                    
+                    {{if EditLink}}
+                        <span>
+                            <a href="${EditLink.Href}" title="${EditLink.ToolTip}" class="communityContentCommentEditLink">${EditLink.Title}</a>
+                        </span>
+                    {{/if}}
+
+                    {{if DeleteLink}}
+                        <span>
+                            <a href="${DeleteLink.Href}" title="${DeleteLink.ToolTip}" class="communityContentDeleteLink">${DeleteLink.Title}</a>
+                        </span>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<div class="communityContentContainer">
+    <div id="CommunityContentHeader" class="communityContentHeader">
+        <div class="communityContentHeaderTitleContainer">
+            <h2>Community Additions</h2>
+                <a class="communityContentAddLink" href="http://msdn.microsoft.com/en-us/library/community/add/938d9dz2%28v=vs.90%29.aspx">
+                    <span class="communityContentAddButton" title="Add">
+                        ADD
+                    </span>
+                </a>
+        </div>
+        <div style="clear: both;"></div>
+    </div>
+    
+    <div id="CommunityComments" data-url="/en-us/library/community/comments/938d9dz2(v=vs.90).aspx"></div>
+</div>
+
+
+
+
+<div class="libraryMemberFilter">
+    <div class="filterContainer">
+        <span>Show:</span>
+        <label>
+            <input class="libraryFilterInherited" checked="checked" value="Inherit" type="checkbox">Inherited
+        </label>
+        <label>
+            <input class="libraryFilterProtected" checked="checked" value="Protected" type="checkbox">Protected
+        </label>
+    </div>
+</div>
+    
+<input id="libraryMemberFilterEmptyWarning" value="There are no members available with your current filter settings." type="hidden">
+
+
+ 
+</div>
+
+
+            </div>
+            <div class="clear"></div>
+
+            
+    
+<input name="__RequestVerificationToken" value="EzHU4J9hTVsVB-rbXCDn7683jhzGHUZ09LZZtfrwjFta-EreFItQa03-SvybfeMk_fFDb2FSehOMGPAd90rYKMLIvH81" type="hidden">
+<input id="ratingSubmitUrl" value="http://msdn.microsoft.com/en-us/library/feedback/add/938d9dz2(v=vs.90).aspx" type="hidden">
+<input id="isTopicRated" value="false" type="hidden">
+
+
+
+
+    
+
+    
+    <link type="text/css" rel="stylesheet">
+    
+    <div id="ux-footer" class="" style="" dir="ltr">
+            
+            <div id="footerSock" class="librarySock both">
+                <div id="footerSockInner">
+                        <a name="feedback"></a>
+
+<div style="display: block;" class="rating">
+    <div id="ratingSection1">
+        <div class="title">
+            Was this page helpful?
+        </div>
+        <div class="description">
+            Your feedback about this content is important.<br>Let us know what you think.
+        </div>
+        <div class="buttons">
+            <button class="button" id="ratingYes">Yes</button>
+            <button class="button" id="ratingNo">No</button>
+        </div>
+        <input id="ratingValue" value="" type="hidden">
+    </div>
+    <div id="ratingSection2">
+        <div class="title">
+            Additional feedback?
+        </div>
+        <textarea id="ratingText" rows="6" cols="" maxlength="1500"></textarea>
+        <div class="counter right">
+            <span id="feedbackTextCounter">1500</span> characters remaining
+        </div>
+        <div class="buttons left">
+            <button class="button" id="ratingSubmit">Submit</button>
+            <button class="button" id="ratingSkipThis">Skip this</button>
+        </div>
+    </div>
+    <div id="ratingSection3">
+        <div class="title">
+            Thank you!
+        </div>
+        <div class="description">
+            We appreciate your feedback.
+        </div>
+    </div>
+    
+    
+    <div id="contentFeedbackQAContainer" style="display: none;"></div>
+</div>
+    
+                    <div class="userVoice">
+    <div class="title">
+        Have a suggestion to improve MSDN Library?
+    </div>
+        <div class="description">
+            Visit our UserVoice Page to submit and vote on ideas!
+        </div>
+    <div class="buttons">
+        <a class="button" id="userVoiceButton" href="http://feedback.msdn.com/forums/257782-msdn-feature-suggestions/category/83975" target="_blank">Make a suggestion</a>
+    </div>
+</div>  
+                    <div class="clear"></div>
+                </div>
+            </div>
+
+        <footer class="top">
+            <div data-fragmentname="LeftLinks" id="Fragment_LeftLinks" xmlns="http://www.w3.org/1999/xhtml">
+  
+  <div class="linkList">
+    <div class="linkListTitle">Dev centers</div>
+    <ul class="links">
+      <li>
+        <a href="http://dev.windows.com/" id="LeftLinks_2148_1" class="windowsBlue" xmlns="http://www.w3.org/1999/xhtml">Windows</a>
+      </li>
+      <li>
+        <a href="http://dev.office.com/" id="LeftLinks_2148_3" class="office" xmlns="http://www.w3.org/1999/xhtml">Office</a>
+      </li>
+      <li>
+        <a href="http://msdn.microsoft.com/vstudio" id="LeftLinks_2148_4" class="visualStudio" xmlns="http://www.w3.org/1999/xhtml">Visual Studio</a>
+      </li>
+      <li>
+        <a href="http://developer.nokia.com/" title="Nokia" id="LeftLinks_2148_15" class="nokia" xmlns="http://www.w3.org/1999/xhtml">Nokia</a>
+      </li>
+      <li>
+        <a href="http://azure.microsoft.com/en-us/documentation/" target="_blank" id="LeftLinks_2148_12" xmlns="http://www.w3.org/1999/xhtml">Microsoft Azure</a>
+      </li>
+      <li>
+        <a href="http://msdn.microsoft.com/aa937802" id="LeftLinks_2148_5" xmlns="http://www.w3.org/1999/xhtml">More...</a>
+      </li>
+    </ul>
+  </div>
+</div>    
+            <div id="rightLinks">
+                <div data-fragmentname="CenterLinks1" id="Fragment_CenterLinks1" xmlns="http://www.w3.org/1999/xhtml">
+  
+  <div class="linkList">
+    <div class="linkListTitle">Learning resources</div>
+    <ul class="links">
+      <li>
+        <a href="http://www.microsoftvirtualacademy.com/" id="CenterLinks1_2151_4" xmlns="http://www.w3.org/1999/xhtml">Microsoft Virtual Academy</a>
+      </li>
+      <li>
+        <a href="http://channel9.msdn.com/" id="CenterLinks1_2151_5" xmlns="http://www.w3.org/1999/xhtml">Channel 9</a>
+      </li>
+      <li>
+        <a href="http://www.interoperabilitybridges.com/" id="CenterLinks1_2151_6" xmlns="http://www.w3.org/1999/xhtml">Interoperability Bridges</a>
+      </li>
+      <li>
+        <a href="http://msdn.microsoft.com/magazine/" id="CenterLinks1_2151_7" xmlns="http://www.w3.org/1999/xhtml">MSDN Magazine</a>
+      </li>
+    </ul>
+  </div>
+</div>
+                <div data-fragmentname="CenterLinks2" id="Fragment_CenterLinks2" xmlns="http://www.w3.org/1999/xhtml">
+  
+  <div class="linkList">
+    <div class="linkListTitle">Community</div>
+    <ul class="links">
+      <li>
+        <a href="https://social.msdn.microsoft.com/forums/en-us/home" id="CenterLinks2_2151_8" xmlns="http://www.w3.org/1999/xhtml">Forums</a>
+      </li>
+      <li>
+        <a href="http://blogs.msdn.com/b/developer-tools/" id="CenterLinks2_2151_9" xmlns="http://www.w3.org/1999/xhtml">Blogs</a>
+      </li>
+      <li>
+        <a href="http://www.codeplex.com/" id="CenterLinks2_2151_10" xmlns="http://www.w3.org/1999/xhtml">Codeplex</a>
+      </li>
+    </ul>
+  </div>
+</div>
+                <div data-fragmentname="CenterLinks3" id="Fragment_CenterLinks3" xmlns="http://www.w3.org/1999/xhtml">
+  
+  <div class="linkList">
+    <div class="linkListTitle">Support</div>
+    <ul class="links">
+      <li>
+        <a href="http://msdn.microsoft.com/hh361695" id="CenterLinks3_2151_11" xmlns="http://www.w3.org/1999/xhtml">Self support</a>
+      </li>
+    </ul>
+  </div>
+</div>
+                <div class="nth-child-4n" data-fragmentname="CenterLinks4" id="Fragment_CenterLinks4" xmlns="http://www.w3.org/1999/xhtml">
+  
+  <div class="linkList">
+    <div class="linkListTitle">Programs</div>
+    <ul class="links">
+      <li>
+        <a href="http://www.microsoft.com/bizspark/" id="CenterLinks4_2151_13" xmlns="http://www.w3.org/1999/xhtml">BizSpark (for startups)</a>
+      </li>
+      <li>
+        <a href="https://www.dreamspark.com/" id="CenterLinks4_2151_14" xmlns="http://www.w3.org/1999/xhtml">DreamSpark</a>
+      </li>
+      <li>
+        <a href="http://www.imaginecup.com/" id="CenterLinks4_2151_17" xmlns="http://www.w3.org/1999/xhtml">Imagine Cup</a>
+      </li>
+    </ul>
+  </div>
+</div>                
+            </div>
+        </footer>
+    
+        <footer class="bottom">
+            <span class="localeContainer">
+                
+    <form class="selectLocale" id="selectLocaleForm" action="http://msdn.microsoft.com/en-us/selectlocale-dmc">
+        <input name="fromPage" value="http%3a%2f%2fmsdn.microsoft.com%2fen-us%2flibrary%2f938d9dz2(v%3dvs.90).aspx" type="hidden">
+        <a href="#" onclick="$('#selectLocaleForm').submit();return false;" title="Change your language">United States (English)</a>
+    </form>
+
+
+            </span>
+        
+            <div data-fragmentname="BottomLinks" id="Fragment_BottomLinks" xmlns="http://www.w3.org/1999/xhtml">
+  
+  <div class="linkList">
+    <ul class="links horizontal">
+      <li>
+        <a href="http://msdn.microsoft.com/newsletter.aspx" id="BottomLinks_2148_7" xmlns="http://www.w3.org/1999/xhtml">Newsletter</a>
+      </li>
+      <li>
+        <a href="http://msdn.microsoft.com/dn529288" id="BottomLinks_2148_8" xmlns="http://www.w3.org/1999/xhtml">Privacy &amp; cookies</a>
+      </li>
+      <li>
+        <a href="http://msdn.microsoft.com/cc300389" id="BottomLinks_2148_9" xmlns="http://www.w3.org/1999/xhtml">Terms of use</a>
+      </li>
+      <li>
+        <a href="http://www.microsoft.com/en-us/legal/intellectualproperty/Trademarks/EN-US.aspx" id="BottomLinks_2148_10" xmlns="http://www.w3.org/1999/xhtml">Trademarks</a>
+      </li>
+    </ul>
+  </div>
+</div>    
+            <span class="logoLegal">
+                <span class="logo"></span>
+                <span class="copyright">© 2014 Microsoft</span>
+            </span>
+        </footer>
+    </div>
+    
+
+
+            <div class="footerPrintView">
+                <div class="footerCopyrightPrintView">© 2014 Microsoft</div>
+            </div>
+
+            
+            
+    
+    
+    <input id="tocPaddingPerLevel" value="17" type="hidden">
+
+
+
+            <input id="MtpsDevice" value="Default" type="hidden">
+
+
+<!--[CDATA[ Third party scripts and code linked to or referenced from this website are licensed to you by the parties that own such code, not by Microsoft.  See ASP.NET Ajax CDN Terms of Use – http://www.asp.net/ajaxlibrary/CDN.ashx. ]]-->
+
+            
+            
+            
+            
+            
+
+
+
+
+
+
+
+<noscript><div><img alt="DCSIMG" id="Img1" width="1" height="1" src="http://m.webtrends.com/dcsmgru7m99k7mqmgrhudo0k8_8c6m/njs.gif?dcsuri=/nojavascript&amp;WT.js=No" /></div></noscript>
+
+
+
+
+
+
+
+
+
+<noscript>
+  <a href="http://www.omniture.com" title="Web Analytics">
+    <img src="//msstonojsmsdn.112.2o7.net/b/ss/msstonojsmsdn/1/H.20.2--NS/0" height="1" width="1" border="0" alt="" />
+  </a>
+</noscript>
+
+
+
+
+<div id="globalRequestVerification">
+    <input name="__RequestVerificationToken" value="AzUTJ75K4btEwIFT0sQvUJQqfnyl6kkq3kjUp2WyWAxTpZOzLXg1RRIL1DCPgspoXsWGCEAqNFI_CLGhIF0v1VCb8xY1" type="hidden">
+</div>
+
+
+        </div>
+
+        
+        
+        
+        
+    <script type="text/javascript" class="mtps-injected">
+/*<![CDATA[*/
+(function(window,document){"use strict";function preload(scripts){for(var result=[],script,e,i=0;i<scripts.length;i++)script=scripts[i],script.hasOwnProperty("url")&&(e=document.createElement("script"),e.src=script.url,script.throwaway=e),result.push(script);return result}function inject(scripts,index){var script,elem;if(index>=scripts.length){delete mtps.injectScripts;return}script=scripts[index];elem=document.createElement("script");elem.className="mtps-injected";elem.async=!1;var isLoaded=!1,timeoutId=0,injectNextFnName="",injectNext=elem.onerror=function(){isLoaded||(isLoaded=!0,inject(scripts,index+1),window.clearTimeout(timeoutId),elem.onload=elem.onerror=elem.onreadystatechange=null,injectNextFnName&&delete mtps[injectNextFnName],elem.removeEventListener&&elem.removeEventListener("load",injectNext,!1))};elem.addEventListener?elem.addEventListener("load",injectNext,!1):elem.readyState==="uninitialized"?elem.onreadystatechange=function(){(this.readyState==="loaded"||this.readyState==="complete")&&injectNext()}:elem.onload=injectNext;script.hasOwnProperty("url")?(timeoutId=window.setTimeout(injectNext,12e4),elem.src=script.url):(injectNextFnName="_injectNextScript_"+index,mtps[injectNextFnName]=injectNext,timeoutId=window.setTimeout(injectNext,2e3),elem.text="try {\n"+script.txt+"\n} finally { MTPS."+injectNextFnName+" && MTPS."+injectNextFnName+"(); }");parent.appendChild(elem)}var mtps=window.MTPS||(window.MTPS={}),parent=document.getElementsByTagName("head")[0];mtps.injectScripts=function(scripts){inject(preload(scripts),0)}})(window,document);
+MTPS.injectScripts([
+	{ txt: "/**/\r\n(window.MTPS || (window.MTPS = {})).cdnDomains || (window.MTPS.cdnDomains = { \r\n\t\"image\": \"http://i.msdn.microsoft.com\", \r\n\t\"js\": \"http://i2.msdn.microsoft.com\", \r\n\t\"css\": \"http://i3.msdn.microsoft.com\", \r\n\t\"xap\": \"http://207.46.99.216\"\r\n});\r\n/**/" },
+	{ url: "http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js" },
+	{ txt: "//\n  var literalNormalizedUrl = \u0027/en-us/library/938d9dz2(l=en-us,v=vs.90).aspx\u0027;\n  var wt_nvr_ru = \u0027WT_NVR_RU\u0027;\n  var wt_fpcdom = \u0027.microsoft.com\u0027;\n  var wt_domlist = \u0027msdn.microsoft.com\u0027;\n  var wt_pathlist = \u0027\u0027;\n  var wt_paramlist = \u0027DCSext.mtps_devcenter\u0027;\n  var wt_siteid = \u0027MSDN\u0027;\n  var gDomain = \u0027m.webtrends.com\u0027;\n  var gDcsId = \u0027dcsmgru7m99k7mqmgrhudo0k8_8c6m\u0027;\n  var gFpc = \u0027WT_FPC\u0027;\n\n\n\n  if (document.cookie.indexOf(gFpc + \"=\") == -1) {\n    var wtidJs = document.createElement(\"script\");\n    wtidJs.src = \"//\" + gDomain + \"/\" + gDcsId + \"/wtid.js\";\n    document.getElementsByTagName(\"head\")[0].appendChild(wtidJs);\n  }\n\n\n\n  var detectedLocale = \u0027en-us\u0027;\n  var wtsp = \u0027msdnlib_devtools_lang\u0027;\n  var gTrackEvents = \u00270\u0027;\n/**/" },
+	{ txt: "/**/\n  var omni_guid = \"6253edcf-a263-4dba-961b-92b952a5c5c6\";\n/**/" },
+	{ txt: "//\n\n            window.appInsightsId = \u002760854590-027a-4ae4-98be-2741a40f355f\u0027;\n            //" },
+	{ url: "http://i2.msdn.microsoft.com/Combined.js?resources=0:Utilities,1:Layout,2:Header,3:FeedbackCounterAsync,1:Rating,2:Footer,0:Topic,4:webtrendsscript,5:omni_rsid_MSDN,0:AppInsightsPerf,6:Toc,1:SearchBox;/Areas/Epx/Content/Scripts:0,/Areas/Epx/Themes/Base/Content:1,/Areas/Centers/Themes/StandardDevCenter/Content:2,/Areas/Epx/Shared/Content:3,/Areas/Global/Content/Webtrends/resources:4,/Areas/Global/Content/Omniture/resources/MSDN:5,/Areas/Library/Content:6\u0026amp;hashKey=20CA3E0E0DB7E856CD9137C92688CC69\u0026amp;v=EFDC29210BFC61F552624A138B86765E" },
+	{ url: "http://i1.services.social.microsoft.com/search/Widgets/SearchBox.jss?boxid=HeaderSearchTextBox\u0026btnid=HeaderSearchButton\u0026brand=Msdn\u0026loc=en-us\u0026focusOnInit=false\u0026emptyWatermark=true\u0026searchButtonTooltip=Search MSDN" },
+	{ url: "http://i2.msdn.microsoft.com/Combined.js?resources=0:PrintExportButton,1:NavigationResize;/Areas/Library/Themes/Base/Content:0,/Areas/Library/Content:1\u0026amp;hashKey=72684789A0F98A77C33C1AC3470E9ECF\u0026amp;v=EFDC29210BFC61F552624A138B86765E" },
+	{ txt: "MTPS = window.MTPS || {}; MTPS.LocalizedStrings = window.MTPS.LocalizedStrings || {}; MTPS.LocalizedStrings.ExpandButtonTooltip = \u0027Expand\u0027; MTPS.LocalizedStrings.CollapseButtonTooltip = \u0027Collapse\u0027; MTPS.LocalizedStrings.EnhancedExpandTooltip = \u0027Click to expand. Double-click to expand all.\u0027; MTPS.LocalizedStrings.EnhancedCollapseTooltip = \u0027Click to collapse. Double-click to collapse all.\u0027; MTPS.LocalizedStrings.ExpandAllButtonTooltip = \u0027Expand All\u0027; MTPS.LocalizedStrings.CollapseAllButtonTooltip = \u0027Collapse All\u0027;" },
+	{ url: "https://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js" },
+	{ url: "http://i2.msdn.microsoft.com/Combined.js?resources=0:CommunityContent,0:LibraryMemberFilter,1:Toc_Fixed,1:CodeSnippet,1:TopicNotInScope,1:CollapsibleArea,1:VersionSelector,1:SurveyBroker;/Areas/Library/Content:0,/Areas/Epx/Content/Scripts:1\u0026amp;hashKey=EB298C838117D9E7008C7CC11E7732E3\u0026amp;v=EFDC29210BFC61F552624A138B86765E" },
+	{ txt: "$(document).ready(function() {\n        try {\n            var token = $(\"#globalRequestVerification input[name=\u0027__RequestVerificationToken\u0027]\").clone();\n            $(\"#siteFeedbackForm\").append(token);\n        } catch(err) {\n            \n        }\n    });" }
+]);
+
+/*]]>*/
+</script>
+<script src="How%20to%20%20Create%20and%20Run%20a%20CLR%20SQL%20Server%20Trigger_dosyalar/broker-config.js"></script><div id="_WEDCSInsertedData" style="display: none;"><iframe id="_msnFrame" src="How%20to%20%20Create%20and%20Run%20a%20CLR%20SQL%20Server%20Trigger_dosyalar/c_002.gif" style="z-index:-1;height:1px;width:1px;display:none;visibility:hidden;" onload="javascript:MscomBeacon();"></iframe></div></body></html>

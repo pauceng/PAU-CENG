@@ -1,0 +1,17 @@
+1) Londra merkezli tedarikçilerin þehirlerini Birmingham olarak deðiþtir ve statülerini de 5 arttýr.
+2) Paris merkezli tedarikçilerin tedarik miktarýný sýfýrla.
+3) Londra merkezli tüm projeleri sil
+4) Tedarikçi statüsü 15'ten az olan tedarikçilerin tedariklerini sil
+5) Tedarikçi numarasý S6, adý Brown, Paris merkezli ve statüsü 30 olan yen bir tedarikçi ekleyin.
+
+
+CREATE TABLE KITAP
+
+(KNO INTEGER
+Kadi VARCHAR(100),
+ISBN VARCHAR(14), UNIQUE,
+PRIMARY KEY(ADI))
+
+YAZAR (YNO(PK), ADI, UYRUK)
+
+KÝTAPYAZAR(KNO, YNO)

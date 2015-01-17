@@ -1,0 +1,16 @@
+﻿Build started 21-Nov-14 04:36:15.
+     1>Project "C:\Users\Bilal\Desktop\Courses\OS\01.06.11.2014\01.06.11.2014\Desktop\lab2\lab2\lab2.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\lab2.pch" /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt lab2.cpp
+         lab2.cpp
+     1>c:\users\bilal\desktop\courses\os\01.06.11.2014\01.06.11.2014\desktop\lab2\lab2\lab2.cpp(94): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(290) : see declaration of 'scanf'
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Bilal\Desktop\Courses\OS\01.06.11.2014\01.06.11.2014\Desktop\lab2\Debug\lab2.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Bilal\Desktop\Courses\OS\01.06.11.2014\01.06.11.2014\Desktop\lab2\Debug\lab2.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Bilal\Desktop\Courses\OS\01.06.11.2014\01.06.11.2014\Desktop\lab2\Debug\lab2.lib" /MACHINE:X86 Debug\lab2.obj
+         Debug\stdafx.obj
+         lab2.vcxproj -> C:\Users\Bilal\Desktop\Courses\OS\01.06.11.2014\01.06.11.2014\Desktop\lab2\Debug\lab2.exe
+     1>Done Building Project "C:\Users\Bilal\Desktop\Courses\OS\01.06.11.2014\01.06.11.2014\Desktop\lab2\lab2\lab2.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.99

@@ -1,0 +1,52 @@
+--> OGRENCILER(OGRNO, OGRAD, OGRSOYAD, CINSIYET, BOLUMKOD)
+---------------------------------------------------------------------------------------------------------------------------------------------
+--> ÖRNEK: Öðrenciler tablosuna kayýt ekleyen saklý yordam yazar mýsýn tatlým.
+
+***
+CREATE PROC EKLE(@OGRNO INT, @OGRAD CHAR(25), @OGRSOYAD(25), @CINSIYET INT, @BOLUMKOD INT)
+AS
+	BEGIN
+		INSERT INTO OGRENCILER(OGRNO, OGRAD, OGRSOYAD, CINSIYET, BOLUMKOD) VALUES(@OGRNO, @OGRAD, @OGRSOYAD, @CINSIYET, @BOLUMKOD)
+	END
+***
+--> EXECUTE EKLE 11253006, 'BÝLAL', 'ARSLAN', 1, 253
+---------------------------------------------------------------------------------------------------------------------------------------------
+--> Numarasý verilen bir öðrenciyi silen saklý yordam yazar mýsýn hayatým.
+***
+CREATE PROC SIL(@OGRNO INT)
+AS
+	BEGIN
+		DELETE FROM OGRENCILER WHERE OGRNO=@OGRNO
+	END
+***
+--> EXEC SIL 11253006
+#############################################################################################################################################
+SALES(Dept(PK), Item(PK), Volume)
+DEPT(Dname(PK), Floor)
+ITEM(IName, Type, Color)
+EMPLOYEE(ENO(PK), EName, Mgr(int), Dept(FK), Salary, JobStatus)
+SUPPLIER(SNO(PK), SName)
+SUPPLY(SNO(PK), Dept(PK), Item(PK), Volume)
+
+1) Andersonýn müdürünün ismini bulunuz.
+--> SELECT EName FROM EMPLOYEE WHERE ENO=(SELECT MGR FROM EMPLOYEE WHERE EName='Anderson')
+
+2) A tipinden ürün saðlayan tüm üreticilerin(Supplier) saðladýðý ürünleri bulunuz.
+--> SELECT IName FROM ITEM WHERE Type='A' AND NOTEXIST (SELECT * FROM SUPPLIER SP WHERE NOTEXIST (SELECT * FROM SUPPLY S WHERE S.NO=SP.SNO AND S.Item=ITEM.IName))
+
+3) Müdürlerinden fazla kazanan çalýþanlarýn isimlerini bulunuz
+--> SELECT EName FROM EMPLOYEE WHERE Salary>(SELECT Salary FROM EMPLOYEE WHERE ENO=(SELECT MGR FROM EMPLOYEE))
+--> SELECT EName FROM EMPLOYEE E, EMPLOYEE M WHERE E.MGR=M.ENO AND E.Salary>M.Salary
+
+4) A tipinden ürün satmayan departmanlarý bulunuz.
+--> SELECT D.DName FROM DEPT D, SALES S, ITEM I WHERE D.Dept=S.Dept AND I.IName=S.IName AND I.Type<>'A'
+--> SELECT D.DName FROM DEPT WHERE EXIST(SELECT * FROM ITEM WHERE Type='A' AND NOTEXIST(SELECT * FROM SALES WHERE Dept=D.DName AND))
+
+5) Kendilerine saðlanan(supply) tüm ürünleri satan departanlarý bulunuz.
+--> SELECT D.DName FROM DEPT WHERE NOTEXIST(SELECT * FROM ITEM WHERE NOTEXIST(SELECT * FROM SUPPLY WHERE Dept=D.DName AND))
+
+6) Supplier tarafýndan saðlanan tüm ürünleri satan departmanlar için departman-supplier çiftlerini listeleyiniz.
+--> SELECT D.DName, SNO FROM DEPT D, SUPPLIER SP WHERE NOTEXIST(SELECT * FROM ITEM I WHERE NOTEXIST(SELECT * FROM SUPPLY S WHERE S.SNO=SP.NO AND S.DEPT=D.DName AND S.Item=I.IName))
+
+7) AVG, SUM, MIN, MAX gibi fonksiyonlarý araþtýr lo.
+

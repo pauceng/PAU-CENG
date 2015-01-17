@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html><head>
+	<title>Indexes in MS SQL Server - CodeProject</title> 
+	<link type="text/css" rel="stylesheet" href="Indexes%20in%20MS%20SQL%20Server%20-%20CodeProject_dosyalar/Main.css">
+<link type="text/css" rel="stylesheet" href="Indexes%20in%20MS%20SQL%20Server%20-%20CodeProject_dosyalar/print.css">
+
+	
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="Description" content="This article focuses on how MS SQL Server uses indexes to read and write data.; Author: Keshav Singh; Updated: 2 May 2011; Section: Database; Chapter: Database; Updated: 2 May 2011">
+<meta name="Keywords" content="SQL, SQL-Server, Dev, Intermediate,Database,Database,Free source code, tutorials">
+<meta name="Author" content="Keshav Singh">
+<meta name="Rating" content="General">
+<meta name="Robots" content="index, follow, NOODP">
+<meta name="Revisit-After" content="1 days">
+<meta name="application-name" content="CodeProject">
+<meta name="google-translate-customization" content="d908bb7ce7aff658-4c2f3a504525c916-g629383f736781a8a-13">
+
+<link rel="dns-prefetch" href="http://ajax.googleapis.com/"> 
+<link rel="canonical" href="http://www.codeproject.com/Articles/190263/Indexes-in-MS-SQL-Server">
+
+
+<link rel="alternate" type="application/rss+xml" title="CodeProject Latest articles - All Topics" href="http://www.codeproject.com/WebServices/ArticleRSS.aspx?cat=1">
+<link rel="alternate" type="application/rss+xml" title="CodeProject Latest articles - Android" href="http://www.codeproject.com/WebServices/ArticleRSS.aspx?cat=22">
+<link rel="alternate" type="application/rss+xml" title="CodeProject Latest articles - iOS" href="http://www.codeproject.com/WebServices/ArticleRSS.aspx?cat=25">
+<link rel="alternate" type="application/rss+xml" title="CodeProject Latest articles - C++" href="http://www.codeproject.com/WebServices/ArticleRSS.aspx?cat=2">
+<link rel="alternate" type="application/rss+xml" title="CodeProject Latest articles - C#" href="http://www.codeproject.com/WebServices/ArticleRSS.aspx?cat=3">
+<link rel="alternate" type="application/rss+xml" title="CodeProject Latest articles - Web" href="http://www.codeproject.com/WebServices/ArticleRSS.aspx?cat=23">
+<link rel="alternate" type="application/rss+xml" title="CodeProject Lounge Postings" href="http://www.codeproject.com/webservices/LoungeRSS.aspx">
+<link rel="search" type="application/opensearchdescription+xml" title="CodeProject" href="http://www.codeproject.com/info/OpenSearch.xml">
+
+	<!-- base href="http://www.codeproject.com/Articles/190263/Indexes-in-MS-SQL-Server?display=Print" -->
+	<link rel="icon" href="http://www.codeproject.com/favicon.ico" type="image/ico">
+<link rel="shortcut icon" href="http://www.codeproject.com/favicon.ico" type="image/ico">
+<link rel="apple-touch-icon" href="http://www.codeproject.com/images/FavIcon-Apple.png" type="image/png">
+<script type="text/javascript" language="Javascript">//<![CDATA[
+function defrm () { /* thanks twitter */ document.write = ''; window.top.location = window.self.location;  setTimeout(function() { document.body.innerHTML = ''; }, 0);  window.self.onload = function(evt) { document.body.innerHTML = ''; }; }if (window.top !== window.self) {  try {  if (window.top.location.host) { /* will throw */ } else { defrm(); /* chrome */ }  } catch (ex) { defrm(); /* everyone else */ } }if (typeof(DemoUrl)!='undefined')   document.write(unescape('%3Cme')+'ta http'+'-equiv="re'+'fresh"                  con'+'tent="1;url='+DemoUrl+unescape('"%3CE'));
+
+//]]>
+</script>
+
+	
+
+
+
+
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-1735123-1']);
+	_gaq.push(['_trackPageview']);
+	_gaq.push(['_setDomainName', 'www.codeproject.com']);
+	_gaq.push(['_setSessionTimeout', '1200']); 
+
+	(function () {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+	})(); 
+</script><script src="Indexes%20in%20MS%20SQL%20Server%20-%20CodeProject_dosyalar/ga.js" async="" type="text/javascript"></script>
+
+
+<link href="Indexes%20in%20MS%20SQL%20Server%20-%20CodeProject_dosyalar/translateelement.css" charset="UTF-8" rel="stylesheet" type="text/css"><script src="Indexes%20in%20MS%20SQL%20Server%20-%20CodeProject_dosyalar/main_tr.js" charset="UTF-8" type="text/javascript"></script><script src="Indexes%20in%20MS%20SQL%20Server%20-%20CodeProject_dosyalar/element_main.js" charset="UTF-8" type="text/javascript"></script></head>	
+
+<body class="firefox firefox33">
+
+<a class="access-link" href="#Main"><img alt="Click here to Skip to main content" src="Indexes%20in%20MS%20SQL%20Server%20-%20CodeProject_dosyalar/t.gif"></a>
+
+
+
+
+
+<div class="page-background">
+
+	
+	
+
+	
+
+	<table id="ctl00_Bn" style="width:100%;height:135px" class="banner fluid" cellpadding="0" cellspacing="0">
+	<tbody><tr valign="bottom">
+		<td class="blank-background" style="height:31px">&nbsp;</td>
+		<td class="blank-background" rowspan="3" style="width:250px;height:135px"><a href="http://www.codeproject.com/"><img id="ctl00_Logo" tabindex="1" title="CodeProject" src="Indexes%20in%20MS%20SQL%20Server%20-%20CodeProject_dosyalar/logo250x135.gif" alt="Home" style="height:135px;width:250px;border-width:0px;"></a></td>
+		<td class="blank-background align-right" style="width:728px;height:31px"></td>
+		<td class="blank-background" style="height:31px">&nbsp;</td>
+	</tr>
+	<tr valign="middle">
+		<td class="theme1-background" style="height:94px">&nbsp;</td>
+		<td class="theme1-background ad"></td>
+		<td class="theme1-background" style="height:94px">&nbsp;</td>
+	</tr>
+	<tr valign="top">
+		<td style="height: 14px;"></td>
+		<td style="height: 14px;" class="blank-background"></td>
+		<td style="height: 14px;"></td>
+	</tr>
+</tbody></table>
+
+
+	<a href="#Main"><img alt="Click here to Skip to main content" class="access-link" src="Indexes%20in%20MS%20SQL%20Server%20-%20CodeProject_dosyalar/t.gif"></a>
+
+	
+	
+	
+
+	<div id="A" class="container-content-wrap fluid print"> 
+
+	<div itemscope="" itemtype="http://schema.org/Article" class="container-content"> 
+
+		<div class="clearfix">
+			<div class="float-left container-breadcrumb">
+				<div><a href="http://www.codeproject.com/script/Content/SiteMap.aspx">Articles</a> » <a href="http://www.codeproject.com/Chapters/4/Database.aspx">Database</a> » <a href="http://www.codeproject.com/KB/database/"><span itemprop="articleSection">Database</span></a> » <a href="http://www.codeproject.com/KB/database/#SQL+Server">SQL Server</a></div>
+			</div>
+
+			<div class="align-left float-right padded-top" style="width">
+				
+			</div>
+
+			<div class="float-right article-nav">
+				
+				
+			</div>
+
+			<div class="align-right float-left">
+				
+			</div>
+		</div>
+
+		<table class="extended container-article-parts" cellpadding="0" cellspacing="0">
+        <tbody><tr valign="top">
+		<td width="117px">
+
+			
+
+		</td>
+		<td>
+			
+			<div id="AT" class="container-article  fluid tight"> 
+				<div class="article">
+
+					<form name="aspnetForm" method="post" action="/Articles/190263/Indexes-in-MS-SQL-Server?display=Print" id="aspnetForm" style="margin:0;padding:0">
+<div>
+<input name="__VIEWSTATE" id="__VIEWSTATE" value="4cwAlLxjjSXmfnAmEbXHSKWTbZbAmeaRaFYaGSERpT3gXoDnTCoJYkrbv9W041vUG0zdHWpZ7iSk7r/LwVj9Erhm3wkll7rf4YKQlal2h8gjfrTy6lV4yEcJLGx8woXd+4r1eHQjakuXcMI2KHTNeWxDfW4foM1N+4djbf8g9mcmT/yj0bgkpApU31FC5bLXqT/Xb1Y8rjj0kxdNVg/3e2k2Egyw/aruFIOMlrgVxbKZMIViWWdNVHHybMCM6Xpj8qKOha3k4SEI5Cq5aHs8OPrnFaoJqn+OCJUWTLlSzxfiD3IbQ3v+iVFHDXq0QOEAQiugBYetP8Be4A17yqnm2RwK6wJEfa6jO63OEVApCOAEprBw8MYYaxMadMB+3YnBbi4WiUeMtdtoyZ8CSZyeSdmUr5Ev4wxmKVKA/eJiCq32bduCPNutZCenyrdyUUNMMRCMzieHbikReWrqzkOLRNy3/Dt985qm5tXEx+d1g1G5l0okh14aHTxh+YnOgy5HpjYEHDBIXwdbRwaOL6O8lcbFHahWAIMcxByeu1P0DLhzWG2A0SrBpcELSkLv4fic9wzx4RqWptgd8foemkutNRQvVyd0jGXu+n3ACA55EHdg7OcSptoHyFvmwGRGqFig5tFy1UK4QZxxOCfdnNC99P+Yezwc/nHp1+4pPwaakl0udSquXoUEe9mVZwkPrTnD6iW8zV6DRV7UknNVwqdpl1ey4Fl/9tBZlGyyAhpKQk3drxZ6gkmzFn7hVwPGcFeK23FDj0i4u3BpYRB261ArILwBLRGAYV/a+CtgrzTqy6MHIClBjYYsrqOd41OO+8TWb+DrBnamOa1pfTgoSa8Fi0lAjmMVB5thcoml5MAHfQ+3Ofq3GEr9eLCT2XjUKCa3lMChJLFiJqsy076m2b05ehPqT/te9tHCO3XUiI0IBdOMhApWbL7TCoyc0/tAePCFyS6mUKY/m5RunbPhTIRRtWXw2/RxTbd+Q+2/qe0/JFAe6H63a3UccauHmkP/spcdA/5QmYYAiTcLe7ZQN8vChqBwktku/aHKaSXPyWBpwjobKRGgnuxvrq1mzz7q/wy1dO16QdplanGwf5IcgIbCswKCRGg2qAck/gfRS5OdZaG9nxeGlf9ubxsKduIes1XKSLPI77i8sDpTJz1FA2qCpNTgO3bG+KY3vD1dQmDWzV7YEh0SiYk7sxTvBQDyJNNsWdEkZ2ih9RDSa5X7Q3purf+xeEktGDCJQC85BuYIowg/FmKig+clOhpmz+KEwzZ4iKQWx4s4sAOrFsWJG0am36n37xt7GWDdm6QSFFguYguJeZymPMYWFHK9XZGbZdbyC6WRTef+FuyDv8TQO7CDSWZa28KvG7MVv/gI9SB2SWwLC71XPTPxdz/T6ZRsXYCewCR8att/QzNoAZu7H1X67QuObCu9bgehsOzUklqA8LpYdG1xMXcUGKCYI5vL6nSGfdDX8CQMI4Dd1Iz1JVy/S2D8mNu3GU6t29OC9D59tnLmvRvB1iwfFRCwNmgg8DQbIc9m8Cjm5rr0h4P4W+PG9PiypiI/FLfoxBUzsen6JLdQumVuXUgBCdVe7vfS1VvXbfK8vl/viI2x+NBOAgnWHRgx14x5xKBGZRSOYJVkqt/ntUe7Lx+gsUjyQQlS4nl9oPaneohp9Rk2fqHMJj/alPssAot4ZCOdGEzxlZuebtho8ksG/miLtrFONLcOMBLDYovY3fR1TOiwfyISb8nk0jLUFsGbaXF8ga/sLHs3FiZTNzTg7dhQL5rGXQIyxln8kJyYvCx2kv6NDo/g02Qg+Kgz5Xy9jRVbVTiFnfB0NNf0QI9P+J/ZYLLvN0mQJfHpfXUtcvjAitN8MGlvMbalGGATJULbvrDMtmsp86Ez/16Jh36tMQqDNefh2FWsMgjPL7KUbJsAv3pC1p42QIycRe7+0zC1Oc1B9mkv9QAYLFfdH67G2MyzaZTZcwxdfn9k02aGT5/8xm6KimXP/gnZAqMjL+9rVqhk4eGMwPtrAVLEYHHaLsFmLG0pNiKMGsyOKgszMnB/X+r7ENiqosUR7ekzWe2iwN43I7oKCtsGcJ3cZdn2dlML31hjiJeVIdGwTQXt7/mv/joOXNvZp8hwijV65i+tDRn7Toccvu7sOxSoKz/g" type="hidden">
+</div>
+
+<div>
+
+	<input name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="10C1FD69" type="hidden">
+</div>
+
+					
+					 
+					<div class="header">
+					    <a name="Main"></a>
+
+					    
+					    <a name="_articleTop" id="_articleTop"></a>
+					    <div class="title">
+					        
+					        <h1 id="ctl00_ArticleTitle" itemprop="name">Indexes in MS SQL Server</h1> 
+					    </div>
+
+                        <div style="height:34px">
+					        
+					        <div class="entry float-left">
+                                
+                                <div class="float-left">
+
+						            <span class="author"><a href="http://www.codeproject.com/script/Membership/View.aspx?mid=4444845" rel="author"><span itemprop="author" itemscope="" itemtype="http://schema.org/Person"><span itemprop="name">Keshav Singh</span></span></a></span>, 
+						            <span class="date" itemprop="dateModified" content="2011-05-02 19:09:00">
+							            2 May 2011</span>
+			
+                                    <a id="ctl00_LicenseLink" title="The Code Project Open License (CPOL)" class="license" href="http://www.codeproject.com/info/cpol10.aspx">CPOL</a><div id="ctl00_CurRat" class="tooltip anchorLink" style="cursor:pointer;margin-top: 5px">
+				
+							            
+
+<table class="small-text" itemprop="aggregateRating" itemscope="" itemtype="http://schema.org/AggregateRating" cellpadding="0" cellspacing="0"> 
+<tbody><tr>
+	
+	<td class="nowrap">
+
+		
+			<meta itemprop="bestRating" content="5"> 
+			<meta itemprop="worstRating" content="1">
+		
+
+		<span id="ctl00_ArticleRating_VI">
+		<div class="nowrap rating-stars-large" style="height:21px;width:119px;position:relative;">
+	<div class="clipped align-left float-left" style="height:19px;width:116px;">
+		<img src="Indexes%20in%20MS%20SQL%20Server%20-%20CodeProject_dosyalar/stars-fill-lg.png" style="border-width:0px;">
+	</div><div class="clipped" style="height:19px;width:3px;position:relative;">
+		<img src="Indexes%20in%20MS%20SQL%20Server%20-%20CodeProject_dosyalar/stars-empty-lg.png" style="border-width:0px;position:absolute;top:0;right:0;">
+	</div>
+</div>
+		</span>
+
+		
+	</td>
+	
+	<td id="ctl00_ArticleRating_VR" class="nowrap">
+		&nbsp;
+		<span id="ctl00_ArticleRating_VotesR">&nbsp;<span itemprop="ratingValue" class="rating">4.88</span> (<span itemprop="ratingCount" class="count">44</span> votes)</span>
+		
+	</td>
+
+</tr>
+
+</tbody></table>
+
+
+							            <div id="ctl00_RB" class="speech-bubble-container-up">
+								            <div class="speech-bubble-up" style="width:150px !important">
+									                        
+<div>
+<table class="feature" title="Voting Distribution. Recent data only" height="20px" width="100%" cellpadding="0" cellspacing="0"><tbody><tr class="chart-row"><td class="chart-column"><img src="Indexes%20in%20MS%20SQL%20Server%20-%20CodeProject_dosyalar/t.gif" alt="" title="" height="1px" width="20pxpx" border="0px"><br><span title="0 votes">1</span></td>
+<td class="chart-column"><img src="Indexes%20in%20MS%20SQL%20Server%20-%20CodeProject_dosyalar/t.gif" alt="" title="" height="1px" width="20pxpx" border="0px"><br><span title="0 votes">2</span></td>
+<td class="chart-column"><img src="Indexes%20in%20MS%20SQL%20Server%20-%20CodeProject_dosyalar/t.gif" alt="" title="" height="1px" width="20pxpx" border="0px"><br><span title="0 votes">3</span></td>
+<td class="chart-column"><img src="Indexes%20in%20MS%20SQL%20Server%20-%20CodeProject_dosyalar/pollcol.gif" alt="7 votes, 15.9%" title="7 votes, 15.9%" height="3px" width="20pxpx" border="0px"><br><span title="7 votes">4</span></td>
+<td class="chart-column"><img src="Indexes%20in%20MS%20SQL%20Server%20-%20CodeProject_dosyalar/pollcol.gif" alt="37 votes, 84.1%" title="37 votes, 84.1%" height="20px" width="20pxpx" border="0px"><br><span title="37 votes">5</span></td>
+</tr></tbody></table><div class="small-text align-center">4.88/5 - 44 votes</div><div class="small-text align-center subdue">μ 4.88, σ<sub>a</sub> 0.98 [<a href="http://www.codeproject.com/KB/FAQs/RatingReputationFAQ.aspx#noisefilter">?</a>]</div>
+</div>
+								            </div>
+								            <div class="speech-bubble-pointer-up">
+									            <div class="speech-bubble-pointer-up-inner"></div>
+								            </div>
+							            </div>
+						            </div>
+                                </div>
+					        </div>
+
+                            
+						    
+						    	
+
+						    	
+                            <div class="float-right" style="margin-right:20px">
+						        
+                            </div>                    
+						    	
+                        </div>
+
+   					    
+                        <div id="ctl00_description" class="summary">This article focuses on how MS SQL Server uses indexes to read and write data.</div>			
+
+                    </div>
+                    
+					
+					
+
+					
+
+					
+					
+					
+
+						
+					
+
+					
+
+						
+						<div id="contentdiv" class="text" itemprop="articleBody">
+						
+
+
+
+<h2>Introduction</h2>
+
+<p>I bought a book from crossword; he packed the book and added two 
+bookmarks into my pack. A thought came to my mind. Why do I need a 
+bookmark? I can easily memorize the page number and the next time resume
+ from the same page when I resume reading, or read them all over to 
+reach to the point where I stopped reading. But not all have a blessed 
+memory; moreover, there are better things to remember, my grandpa would 
+rather bookmark and rely on it to help him resume reading. It’s a kind 
+of simple index, isn’t it?</p>
+
+<p>This article focuses on how MS SQL Server uses indexes to read and write data. Data is arranged by SQL Server in the form of <em>extents</em> and <em>pages</em>.
+ Each extent is of size 64 KB, having 8 pages of 8KB sizes. An extent 
+may have data from multiple or same table, but each page holds data from
+ a single table only. Logically, data is stored in record sets in the 
+table. We have fields (columns) identifying the type of data contained 
+in each of the record sets. A table is nothing but a collection of 
+record sets; by default, rows are stored in the form of heaps unless a 
+clustered index has been defined on the table, in which case, record 
+sets are sorted and stored on the clustered index. The heaps structure 
+is a simple arrangement where the inserted record is stored in the next 
+available space on the table page.</p>
+
+<p>Heaps seem a great option when the motive is simply storing data, but
+ when data retrieval steps in, this option back fires. An index acts as a
+ fire fighter in this scenario. Indexes are arranged in the form of a 
+B-Tree where the leaf node holds the data or a pointer to the data. 
+Since the stored data is in a sorted order, indexes precisely know which
+ record is sitting where. Hence an index optimizes and enhances the data
+ retrieval immensely.</p>
+
+<p>But everything comes at a cost; the price we pay for having an index 
+on the table is, each time there is an Insert/Update/Delete, SQL Server 
+updates the active indexes on the table where these DML are operated. 
+Hence simply creating indexes madly for the sake of better data 
+retrieval will not serve the purpose. If there are 20 indexes on a 
+table, each time a DML is done on the table, all these 20 indexes shall 
+be updated so that they can uniquely figure out the location of the 
+record. Let’s dive deep into the indexes.</p>
+
+<p><strong>Setup</strong>: All code has been tested on MS SQL Server 2008 R2.</p>
+
+<h2>Clustered Index (CI)</h2>
+
+<p>A clustered index is something that reorganizes the way records in 
+the table are physically stored. Therefore a table can have only one 
+clustered index. The leaf nodes of a clustered index contain the data 
+pages, by which I mean the key-value pair in the clustered index has the
+ index key and the actual data value. Also remember, a clustered index 
+will be created on a table by default the moment a primary key is 
+created on the table. A clustered index is something like your train 
+ticket B4/24, you know that you need to board coach B4 and sit on seat 
+number 24. So this index physically leads you to your actual seat.</p>
+
+<p>We will follow this up closely with an example:</p>
+
+<pre lang="sql"><span class="code-keyword">USE</span> TestDB
+<span class="code-keyword">GO</span>
+
+<span class="code-keyword">CREATE</span> <span class="code-keyword">TABLE</span> Sales(
+ ID <span class="code-keyword">INT</span> <span class="code-keyword">IDENTITY</span>(<span class="code-digit">1</span>,<span class="code-digit">1</span>)
+,ProductCode <span class="code-keyword">VARCHAR</span>(<span class="code-digit">20</span>)
+,Price <span class="code-keyword">FLOAT</span>(<span class="code-digit">53</span>)
+,DateTransaction <span class="code-keyword">DATETIME</span>);</pre>
+
+<p>I have created a table Sales, and then created a Stored Procedure to 
+insert 2,00,000 records into the Sales table. This sizable chunk of data
+ will help us to notice the differences very clearly.</p>
+
+<pre lang="sql"><span class="code-keyword">CREATE</span> <span class="code-keyword">PROCEDURE</span> InsertIntoSales
+<span class="code-keyword">AS</span> 
+<span class="code-keyword">SET</span> NOCOUNT <span class="code-keyword">ON</span>
+<span class="code-keyword">BEGIN</span>
+<span class="code-keyword">DECLARE</span> @PC <span class="code-keyword">VARCHAR</span>(<span class="code-digit">20</span>)=<span class="code-string">'</span><span class="code-string">A12CB'</span>
+<span class="code-keyword">DECLARE</span> @Price <span class="code-keyword">INT</span> = <span class="code-digit">50</span>
+<span class="code-keyword">DECLARE</span> @COUNT <span class="code-keyword">INT</span> = <span class="code-digit">0</span>
+      <span class="code-keyword">WHILE</span> @COUNT&lt;200000
+      <span class="code-keyword">BEGIN</span>
+      <span class="code-keyword">SET</span> @PC=@PC+CAST(@COUNT <span class="code-keyword">AS</span> <span class="code-keyword">VARCHAR</span>(<span class="code-digit">20</span>))
+      <span class="code-keyword">SET</span> @Price=@Price+@COUNT
+      <span class="code-keyword">INSERT</span> <span class="code-keyword">INTO</span> Sales <span class="code-keyword">VALUES</span> (@PC,@Price,GETDATE())
+      <span class="code-keyword">SET</span> @PC=<span class="code-string">'</span><span class="code-string">A12CB'</span>
+      <span class="code-keyword">SET</span> @Price=50
+      <span class="code-keyword">SET</span> @COUNT+=1
+      <span class="code-keyword">END</span>
+<span class="code-keyword">END</span>
+
+<span class="code-keyword">EXEC</span> InsertIntoSales</pre>
+
+<p>Now we have created the table and inserted 2,00,000 records into it, but there is no index defined on any column.</p>
+
+<p>Press Control+M. This will “Include the Actual Execution Plan” in the results. Let's run the below query.</p>
+
+<pre lang="sql"><span class="code-keyword">SET</span> <span class="code-keyword">STATISTICS</span> IO <span class="code-keyword">ON</span>
+<span class="code-keyword">SELECT</span> * <span class="code-keyword">FROM</span> Sales <span class="code-keyword">WHERE</span> ID=189923
+
+ID          ProductCode      Price      DateTransaction
+<span class="code-comment">--</span><span class="code-comment">--------- ---------------- ---------- -----------------------
+</span><span class="code-digit">189923</span>      A12CB189922      <span class="code-digit">189972</span>     2011-03-21 12:07:48.<span class="code-digit">310</span>
+
+(<span class="code-digit">1</span> row(s) affected)
+
+<span class="code-keyword">Table</span> <span class="code-string">'</span><span class="code-string">Sales'</span>. Scan count <span class="code-digit">1</span>, logical reads <span class="code-digit">1129</span>, physical reads <span class="code-digit">0</span>, 
+      read-ahead reads <span class="code-digit">0</span>, lob logical reads <span class="code-digit">0</span>, 
+      lob physical reads <span class="code-digit">0</span>, lob read-ahead reads <span class="code-digit">0</span>.
+
+
+(<span class="code-digit">1</span> row(s) affected)</pre>
+
+<p><img src="Indexes%20in%20MS%20SQL%20Server%20-%20CodeProject_dosyalar/image001.png" complete="true" height="144" width="450"></p>
+
+<p>The Execution plan tab on the results show that the record has been retrieved on a table scan and the logical reads are 1129.</p>
+
+<p>Now let’s build a clustered index on the ID column of the Sales table.</p>
+
+<pre lang="sql"><span class="code-keyword">CREATE</span> <span class="code-keyword">CLUSTERED</span> <span class="code-keyword">INDEX</span> CL_ID <span class="code-keyword">ON</span> SALES(ID);</pre>
+
+<p>Let us press CTRL+M and rerun the same query:</p>
+
+<pre lang="sql"><span class="code-keyword">SET</span> <span class="code-keyword">STATISTICS</span> IO <span class="code-keyword">ON</span>
+<span class="code-keyword">SELECT</span> * <span class="code-keyword">FROM</span> Sales <span class="code-keyword">WHERE</span> ID=189923
+
+ID          ProductCode      Price        DateTransaction
+<span class="code-comment">--</span><span class="code-comment">--------- ---------------- ------------ -----------------------
+</span><span class="code-digit">189923</span>      A12CB189922      <span class="code-digit">189972</span>       2011-03-21 12:07:48.<span class="code-digit">310</span>
+
+(<span class="code-digit">1</span> row(s) affected)
+
+<span class="code-keyword">Table</span> <span class="code-string">'</span><span class="code-string">Sales'</span>. Scan count <span class="code-digit">1</span>, logical reads <span class="code-digit">3</span>, physical reads <span class="code-digit">0</span>, 
+      read-ahead reads <span class="code-digit">0</span>, lob logical reads <span class="code-digit">0</span>, 
+      lob physical reads <span class="code-digit">0</span>, lob read-ahead reads <span class="code-digit">0</span>.
+
+
+(<span class="code-digit">1</span> row(s) affected)</pre>
+
+<p><img src="Indexes%20in%20MS%20SQL%20Server%20-%20CodeProject_dosyalar/image002.png" complete="true" height="138" width="416"></p>
+
+<p>The Execution plan tab on the results shows that the record has been 
+retrieved on Index seek and the logical reads are 3. After the clustered
+ index creation, SQL Server has been able to reduce the logical reads 
+dramatically and the query has been optimized. Clearly the index knows 
+where to look for the record.</p>
+
+<h2>Non-Clustered Index (NCI)</h2>
+
+<p>A non-clustered index is a special type of index in which the logical
+ order of the index does not match the physical stored order of the rows
+ on disk. The leaf node of a non-clustered index does not consist of the
+ data pages but a pointer to it. That goes to say that a non-clustered 
+index can’t survive on its own - it needs a base to live on. A 
+non-clustered index uses a clustered index (if defined) or the heap to 
+build itself.</p>
+
+<p>When a non-clustered index uses the heap, the leaf node (or the 
+pointer) is a physical location of the data. When it uses a clustered 
+index, the leaf node (or the pointer) is the clustered index key value 
+and this key value in turn points to the actual data.</p>
+
+<h2>Part I: When NCI Uses a CI</h2>
+
+<p>Getting back to Sales, we already have a CI (CL_ID) on the ID column, now if we have a query something like:</p>
+
+<pre lang="sql"><span class="code-keyword">SET</span> <span class="code-keyword">STATISTICS</span> IO <span class="code-keyword">ON</span>
+<span class="code-keyword">SELECT</span> * <span class="code-keyword">FROM</span> Sales <span class="code-keyword">WHERE</span> ProductCode <span class="code-keyword">like</span> <span class="code-string">'</span><span class="code-string">A12CB908%'</span> <span class="code-keyword">order</span> <span class="code-keyword">by</span> Price
+Press Control+M <span class="code-keyword">and</span> <span class="code-keyword">execute</span> the query
+There are arround <span class="code-digit">111</span> records retrived 
+<span class="code-comment">--</span><span class="code-comment">---------------------------------------------------
+</span>(<span class="code-digit">111</span> row(s) affected)
+
+<span class="code-keyword">Table</span> <span class="code-string">'</span><span class="code-string">Sales'</span>. Scan count <span class="code-digit">1</span>, logical reads <span class="code-digit">1130</span>, physical reads <span class="code-digit">0</span>, 
+      read-ahead reads <span class="code-digit">0</span>, lob logical reads <span class="code-digit">0</span>, 
+      lob physical reads <span class="code-digit">0</span>, lob read-ahead reads <span class="code-digit">0</span>.
+
+(<span class="code-digit">1</span> row(s) affected)</pre>
+
+<p><img src="Indexes%20in%20MS%20SQL%20Server%20-%20CodeProject_dosyalar/image003.png" complete="true" height="154" width="600"></p>
+
+<p>We find that the query first uses the clustered index to get 111 
+records and then uses a sort operation; the logical reads are as high as
+ 1130. There is also a missing index suggestion.</p>
+
+<p>Let’s consider SQL Server’s advice and create a non-clustered index 
+(NONCI_PC) on the ProductCode column. Since we have a CI already, this 
+NCI would be built on the CI.</p>
+
+<pre lang="sql"><span class="code-keyword">CREATE</span> <span class="code-keyword">NONCLUSTERED</span> <span class="code-keyword">INDEX</span> NONCI_PC <span class="code-keyword">ON</span> SALES(ProductCode);</pre>
+
+<p>Press Control+M and rerun the same query, this time around, we can see the data fetch plan change.</p>
+
+<pre lang="sql"><span class="code-keyword">SET</span> <span class="code-keyword">STATISTICS</span> IO <span class="code-keyword">ON</span>
+<span class="code-keyword">SELECT</span> * <span class="code-keyword">FROM</span> Sales <span class="code-keyword">WHERE</span> ProductCode <span class="code-keyword">like</span> <span class="code-string">'</span><span class="code-string">A12CB908%'</span> <span class="code-keyword">order</span> <span class="code-keyword">by</span> Price
+<span class="code-comment">--</span><span class="code-comment">-----------------------------
+</span>(<span class="code-digit">111</span> row(s) affected)
+
+<span class="code-keyword">Table</span> <span class="code-string">'</span><span class="code-string">Sales'</span>. Scan count <span class="code-digit">1</span>, logical reads <span class="code-digit">351</span>, physical reads <span class="code-digit">0</span>, 
+      read-ahead reads <span class="code-digit">7</span>, lob logical reads <span class="code-digit">0</span>, 
+      lob physical reads <span class="code-digit">0</span>, lob read-ahead reads <span class="code-digit">0</span>.
+
+(<span class="code-digit">1</span> row(s) affected)</pre>
+
+<p><img src="Indexes%20in%20MS%20SQL%20Server%20-%20CodeProject_dosyalar/image004.png" complete="true" height="221" width="583"></p>
+
+<p>The logical reads have been minimized and the revised execution plan is as in the figure. This was the example where a <strong><em>non-clustered index used a clustered index</em></strong>.</p>
+
+<h2>Part II: When NCI Uses a Heap</h2>
+
+<p>When there is no clustered index built on a table and a non-clustered
+ index is built, it uses the heap for data retrieval. The indexed column
+ or columns are sorted along with a pointer to the physical location of 
+the data.</p>
+
+<p><em>The big question is, how do I know if I should create an NCI on a CI or on a heap?</em></p>
+
+<p>The answer is in the query, if data is queried typically on one 
+particular column, it would be beneficial to build NCI upon a CI, but 
+when the case is something like what we have in the present Sales 
+example where we will be building a one-column NC index on a heap, the 
+NCI would be merely a two-column table containing the key-value pair 
+(index key and physical location, i.e., value). This would be the best 
+optimization in this scenario. To follow this up, let’s review the 
+example closely.</p>
+
+<p>With respect to the sales example, let’s delete the clustered index CL_ID created on the ID column and re-evaluate.</p>
+
+<pre lang="sql"><span class="code-keyword">DROP</span> <span class="code-keyword">INDEX</span> Sales.CL_ID;
+
+<span class="code-keyword">SET</span> <span class="code-keyword">STATISTICS</span> IO <span class="code-keyword">ON</span>
+<span class="code-keyword">SELECT</span> * <span class="code-keyword">FROM</span> Sales <span class="code-keyword">WHERE</span> ProductCode <span class="code-keyword">like</span> <span class="code-string">'</span><span class="code-string">A12CB908%'</span> <span class="code-keyword">order</span> <span class="code-keyword">by</span> Price
+<span class="code-comment">--</span><span class="code-comment">----------------------------------
+</span>(<span class="code-digit">111</span> row(s) affected)
+
+<span class="code-keyword">Table</span> <span class="code-string">'</span><span class="code-string">Sales'</span>. Scan count <span class="code-digit">1</span>, logical reads <span class="code-digit">114</span>, physical reads <span class="code-digit">0</span>, 
+      read-ahead reads <span class="code-digit">0</span>, lob logical reads <span class="code-digit">0</span>, 
+      lob physical reads <span class="code-digit">0</span>, lob read-ahead reads <span class="code-digit">0</span>.
+
+(<span class="code-digit">1</span> row(s) affected)</pre>
+
+<p><img src="Indexes%20in%20MS%20SQL%20Server%20-%20CodeProject_dosyalar/image005.png" complete="true" height="227" width="584"></p>
+
+<p>The logical reads have been further optimized and the execution plan 
+also has been revised. In this case, the query uses the non-clustered 
+index to be run on the heap.</p>
+
+<p>We have been able to create indexes so that our queries work with a 
+minimal performance overhead. So now the next big question is, <em>Wouldn’t it be great if there was someone to help us out in prompting on the indexes to be built based on our queries? </em></p>
+
+<p><em>Yes there is, DTA reports work for helping us out with this..</em></p>
+
+<h2>Using DTA</h2>
+
+<p>Now we we will see how we can get the advices from DTA and optimize our queries.</p>
+
+<p>To be able to do this, let's drop all the indexes from our Sales table that we have created so far.</p>
+
+<pre lang="sql"><span class="code-keyword">DROP</span> <span class="code-keyword">INDEX</span> CL_ID <span class="code-keyword">ON</span> Sales;
+<span class="code-keyword">DROP</span> <span class="code-keyword">INDEX</span> NONCI_PC <span class="code-keyword">ON</span> Sales;</pre>
+
+<p>Great! Next we will create two workloads for DTA. Go to Start&gt;All 
+Programs&gt;MS SQL Server 2008&gt;Performance Tools&gt;SQL Server 
+Profiler.</p>
+
+<p>Once it loads, on the top left corner, click on New trace, connect to
+ the server, and then the below screen pops up. In the General tab, fill
+ in the trace name (I have named it ‘Trace1’) and check ‘Save to file’ 
+and provide a path for saving your <em>Trace1.trc</em> file.</p>
+
+<p><img id="Picture 1" src="Indexes%20in%20MS%20SQL%20Server%20-%20CodeProject_dosyalar/image001.jpg" complete="true" height="397" width="564"></p>
+
+<p>Next comes the Event Selection tab. Here we need to provide the 
+events for which we want the trace to log the entries. I have simply 
+kept the ‘T-SQL’ active and unchecked the rest.</p>
+
+<p><img id="Picture 3" src="Indexes%20in%20MS%20SQL%20Server%20-%20CodeProject_dosyalar/image002.jpg" complete="true" height="382" width="600"></p>
+
+<p>In the Column Filters button, I have filtered by <em>NTUserName like ‘Keshav SINGH’</em> which is my login.. and pressed OK.</p>
+
+<p><img id="Picture 4" src="Indexes%20in%20MS%20SQL%20Server%20-%20CodeProject_dosyalar/image003_2.png" complete="true" height="326" width="415"></p>
+
+<p>Looks like we are all set. Press Run and begin the trace.</p>
+
+<p>Next we go to the SSMS login and execute the query:</p>
+
+<pre lang="sql"><span class="code-keyword">SELECT</span> * <span class="code-keyword">FROM</span> Sales <span class="code-keyword">WHERE</span> ID=189923</pre>
+
+<p>Go back to the profiler, and we will find the SQL query has been captured. Stop the trace and save it.</p>
+
+<p><img id="Picture 5" src="Indexes%20in%20MS%20SQL%20Server%20-%20CodeProject_dosyalar/image004.jpg" complete="true" height="388" width="600"></p>
+
+<p>Okay, we have been able to prepare the workload. Now it’s time we seek help from DTA..</p>
+
+<p>Go to Start&gt;All Programs&gt;MS SQL Server 2008&gt;Performance Tools&gt;Database Engine Tuning Advisor.</p>
+
+<p>The DTA looks like below. Connect to the same server hosting the 
+TestDB database which has our Sales table. In the General tab for 
+Workload selection, check the file radio button and browse through to <em>Trace1.trc</em> that we captured from the Profiler. The database for Workload Analysis is TestDB and under <em>Select databases and tables to tune</em>, select TestDB and check Sales Table.</p>
+
+<p><img id="Picture 6" src="Indexes%20in%20MS%20SQL%20Server%20-%20CodeProject_dosyalar/image005.jpg" complete="true" height="320" width="600"></p>
+
+<p>Next, in the Tuning Option tab, keep the default selection which is for Indexes tuning.</p>
+
+<p><img id="Picture 7" src="Indexes%20in%20MS%20SQL%20Server%20-%20CodeProject_dosyalar/image006.jpg" complete="true" height="417" width="600"></p>
+
+<p>Press Start Analysis (top left with the green triangle) and DTA starts the job.</p>
+
+<p>Once the job is complete, you will find three more tabs: progress, 
+recommendations, and reports. Let’s take a look at the recommendations. 
+DTA suggests for the query that we should be creating a clustered index 
+on the ID column of the Sales table and also gives the estimated 
+size/cost of the index. If you click on the definition, it also provides
+ the T-SQL query you need to execute. Copy and simply connect to SSMS 
+and execute the query and you shall gain an estimated improvement of 99 
+%.</p>
+
+<p><img id="Picture 10" src="Indexes%20in%20MS%20SQL%20Server%20-%20CodeProject_dosyalar/image007.jpg" complete="true" height="280" width="600"></p>
+
+<p>Okay, so now we have created a CI on Sales (ID) as per the DTA's 
+advice. Next we shall follow the same guidelines for the below query. 
+Create a workload in the profiler and use DTA to optimize the query.</p>
+
+<pre lang="sql"><span class="code-keyword">SELECT</span> * <span class="code-keyword">FROM</span> Sales <span class="code-keyword">WHERE</span> ProductCode <span class="code-keyword">like</span> <span class="code-string">'</span><span class="code-string">A12CB908%'</span> <span class="code-keyword">order</span> <span class="code-keyword">by</span> Price</pre>
+
+<p><img id="Picture 11" src="Indexes%20in%20MS%20SQL%20Server%20-%20CodeProject_dosyalar/image008.jpg" complete="true" height="227" width="600"></p>
+
+<p>On completion, we get two recommendations from DTA and as we can see, an estimated improvement of 98 %.</p>
+
+<p>The first advice is to create a statistics:</p>
+
+<p><img id="Picture 12" src="Indexes%20in%20MS%20SQL%20Server%20-%20CodeProject_dosyalar/image009.png" complete="true" height="200" width="400"></p>
+
+<p>And the second being a non-clustered index on ProductCode and Price.</p>
+
+<p><img id="Picture 13" src="Indexes%20in%20MS%20SQL%20Server%20-%20CodeProject_dosyalar/image010.png" complete="true" height="200" width="400"></p>
+
+<h2>Summary</h2>
+
+<p>Building indexes is totally based on the criteria of querying. There 
+is no hard and fast rule on the number of non-clustered indexes that can
+ be created on a table. The columns on which the DMLs are executed 
+frequently qualify for indexing. SQL Server allows at most one clustered
+ index in any version. As far as non-clustered indexes are concerned, 
+2005 allows 249 of them to be created while 2008 allows 999 
+non-clustered indexes.</p>
+
+<p>To add to that, it is not always the case that the query can be 
+optimized further by simply creating an index on a column. And as there 
+are no free services, indexes too charge considerable fees. Every time 
+there is a DML (insert/update/delete) fired on an indexed table, SQL 
+Server updates the index to be able to identify the record. Hence if 
+there are more indexes, it’s liable that the DMLs will take a longer 
+time to execute. Hence simply creating a large number of indexes doesn’t
+ serve the purpose. That is why it’s advised to drop all indexes before a
+ BCP or BULK INSERTs, and rebuild them upon completion of the activity.</p>
+
+<p>Also, indexes lead to defragmentation of the tables and they charge 
+the costly time of DBAs for their maintenance. If used judiciously, they
+ enhance the performance of queries many folds.</p>
+
+<h2>FAQ</h2>
+
+<p>In an interview, I was asked: <em>Once we declare a primary key, a 
+clustered index is created on the column by default; what if I wish to 
+create a clustered index and a primary key on two different columns? Is 
+it possible?</em></p>
+
+<p>It is very much possible to have two different columns as primary key
+ and clustered indexes. But remember, if I create a Primary Key on a 
+table first, a CI will also be created. Now, in case I need them on two 
+different columns, drop the Primary Key constraint and the CI shall 
+automatically vanish. Now create a CI on column A and declare column B 
+as Primary Key, and column B will have a NCI created by default on it 
+instead of a CI. This way, we can have two columns as Primary Key and CI
+ declared on them.</p>
+
+
+						</div>
+						
+
+						<div class="float-right" style="margin:20px 0 0 10px;border:1px solid #ccc">
+						
+						</div>
+                        
+                        
+						
+						<h2>License</h2>
+						<div id="LicenseTerms"><p>This article, along with any associated source code and files, is licensed under <a href="http://www.codeproject.com/info/cpol10.aspx" rel="license">The Code Project Open License (CPOL)</a></p></div>
+						
+
+                        
+						<h2>Share</h2>
+				        <div style="margin-bottom:40px;width:385px">
+					        
+				        </div> 
+    			        
+
+
+						
+						<h2 id="ctl00_AboutHeading">About the Author</h2>
+						
+
+<div class="container">
+<div style="width:210px;overflow:hidden;float:left;text-align:center">
+	<img id="ctl00_AboutAuthorRptr_ctl00_AboutAuthor_memberPhoto" class="profile-pic" src="Indexes%20in%20MS%20SQL%20Server%20-%20CodeProject_dosyalar/member_unknown.gif" style="border-width:0px;transform:rotate(-2deg);">
+</div>
+<div class="container-member float-left" style="margin:35px 15px 0 0;">
+	<b><a id="ctl00_AboutAuthorRptr_ctl00_AboutAuthor_memberProfileLink" class="author" href="http://www.codeproject.com/Members/Keshav-Singh">Keshav Singh</a></b>
+	<div class="company">
+		<span id="ctl00_AboutAuthorRptr_ctl00_AboutAuthor_memberJobTitle">Database Developer</span>
+		<span id="ctl00_AboutAuthorRptr_ctl00_AboutAuthor_memberCompany"></span> 
+		<br><span id="ctl00_AboutAuthorRptr_ctl00_AboutAuthor_memberLocation">India <img src="Indexes%20in%20MS%20SQL%20Server%20-%20CodeProject_dosyalar/IN.gif" alt="India" height="11px" width="16px"></span>
+	</div>
+</div>
+	
+<div class="padded-top float-left clearfix">
+	I am a Microsoft certified Technology Specialist in MS SQL Server 2008 
+and 2005.I have fair amount of experience and expertise in MS database 
+development, administration and modeling and MS BI. Started my career in
+ 2007 and primarily into MS databases, and later diversified into MS BI 
+especially SSIS. I also have a little exposure in Oracle 10g while 
+working on one of the migration projects. But MS SQL Server is my 
+passion!<br>
+&nbsp;<br>
+Firm believer in knowledge grows from sharing, I really like reading 
+books, trying new features and sharing the little that I know. Unless 
+we're willing to have a go, fail miserably, have another go, success 
+won't happen. The best thing I have discovered about myself is the 
+"never say die" attitude. The best comment I have ever received is when 
+my manager at my first job said "when this guy works he throws away his 
+watch".
+
+	
+
+	
+</div>
+</div><br>
+						
+						
+
+						<div class="clearfix"></div>
+
+						<div style="padding-top:8px">
+							
+						</div>
+
+						
+						<div style="margin:auto;height:90px;margin-top:10px;Widt:730px"> 
+							
+						</div>
+						
+					
+
+				    
+					</form>
+
+				</div>
+
+				
+				
+
+					<h2>Comments and Discussions</h2>
+					
+					<p><img alt="Comment" src="Indexes%20in%20MS%20SQL%20Server%20-%20CodeProject_dosyalar/NewComment.gif" height="16px" width="12px">
+					<b>25 messages</b> have been posted for this article 
+					Visit <b><a id="ctl00_ArticleLink" href="http://www.codeproject.com/Articles/190263/Indexes-in-MS-SQL-Server">http://www.codeproject.com/Articles/190263/Indexes-in-MS-SQL-Server</a></b> to post and view comments on 
+					this article, or click <b><a id="ctl00_PrintWithMessage" href="http://www.codeproject.com/Articles/190263/Indexes-in-MS-SQL-Server?display=PrintAll">here</a></b> 
+					to get a print view with messages.</p>
+					
+				
+
+			</div>
+			
+		</td>
+		<td width="170px">
+			
+		</td>
+		</tr></tbody></table>
+
+		
+		<div class="theme1-background" style="height:2px" id="stickyStop"></div>
+
+		<div class="extended tiny-text">
+			<div class="row">
+				<div class="float-left">
+					<a id="ctl00_PermaLink" itemprop="url" href="http://www.codeproject.com/Articles/190263/Indexes-in-MS-SQL-Server">Permalink</a> | 
+					<a id="ctl00_AdvertiseLink" href="http://developermedia.com/">Advertise </a> |
+					<a id="ctl00_PrivacyLink" href="http://www.codeproject.com/info/privacy.aspx">Privacy</a> |
+                    <a id="ctl00_TermsOfUseLink" href="http://www.codeproject.com/info/TermsOfUse.aspx">Terms of Use</a> |
+					<a id="ctl00_Mobile" rel="nofollow" href="http://www.codeproject.com/Articles/190263/Indexes-in-MS-SQL-Server?display=Mobile">Mobile</a>
+					<br>
+								
+					
+					Web03 |
+					2.8.141208.1 |
+					Last Updated 2 May 2011								
+				</div>
+
+                <div id="ctl00_GoogleTranslate" class="translate float-left"></div>      
+
+				<div class="float-right align-right">
+					Article Copyright 2011 by Keshav Singh<br>Everything else
+					Copyright © <a href="mailto:webmaster@codeproject.com">CodeProject</a>, 1999-2014 <br>
+				</div>
+
+				
+
+			</div>
+		</div>
+		
+
+		<br clear="all">
+		
+			
+
+	</div> 
+	</div>
+</div>
+
+
+<div style="display:none;" id="dm_AdTable">
+	
+</div>
+
+
+
+
+<script type="text/javascript" language="Javascript" src="Indexes%20in%20MS%20SQL%20Server%20-%20CodeProject_dosyalar/jquery.js"></script><script type="text/javascript">//<![CDATA[
+if (typeof jQuery == 'undefined') {
+    document.write(unescape("%3Cscript src='/script/JS/jquery-1.6.2.min.js' type='text/javascript' %3E%3C/script%3E"));
+}//]]></script>
+<script type="text/javascript" language="Javascript" src="Indexes%20in%20MS%20SQL%20Server%20-%20CodeProject_dosyalar/element.js"></script>
+<script type="text/javascript" language="Javascript" src="Indexes%20in%20MS%20SQL%20Server%20-%20CodeProject_dosyalar/MemberProfilePopup.js"></script>
+<script type="text/javascript" language="Javascript">//<![CDATA[
+function googleTranslateElementInit() {  new google.translate.TranslateElement({   pageLanguage: 'en',   layout: google.translate.TranslateElement.InlineLayout.SIMPLE,   autoDisplay: false,   gaTrack: true,   gaId: 'UA-1735123-1'},  'ctl00_GoogleTranslate');}
+$(document).ready(function() { anchorAnimate();
+$('#RHSticky').sticky($('#stickyStop'));
+$('#ctl00_Nav').sticky($('#stickyStop'));
+});
+
+//]]>
+</script>
+
+
+
+<div style="display: none; position: absolute;" id="MemberProfilePopupDiv" class="raised box"></div><div style="display: none; position: absolute;" id="MemberProfilePopupDiv" class="raised box"></div><div style="display: none; position: absolute;" id="MemberProfilePopupDiv" class="raised box"></div></body></html>

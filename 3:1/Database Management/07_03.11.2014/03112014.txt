@@ -1,0 +1,26 @@
+FAKULTELER	(F#(pk), fakulteAd)
+BOLUMLER	(B#, BolumAd, F#(fk))
+DERSLER		(D#(pk), DersAd, B#(fk), TeorikKredi, UygulamaKredi)
+OGRENCILER	(O#(pk), OgrenciAd, OgrenciSoyad, Cinsiyet, DogumTarihi, B#(fk))
+NOTLAR		(O#(pk), D#(pk), Vize, Final, Butunleme, Durum)
+
+
+1) Öðrencileri numaralarýna göre sýralayýn.
+
+-> SELECT * FROM OGRENCILER ORDER BY O#
+
+2) Öðrencileri ad ve soyadlarýna göre A-Z sýralayýnýz.
+
+-> SELECT * FROM OGRENCILER ORDER BY OgrenciAd ASC, OgrenciSoyad Asc
+
+3) 12c KODLU bölümde okuyan öðrencileri isimlerine göre A'dan Z'ye listeleyin.
+
+-> SELECT * FROM OGRENCILER WHERE B#='12c' ORDER BY OgrenciAd DESC
+
+4) Öðrencileri ada göre A'dan Z'ye ve numaraya göre küçükten büyüðe sýralayýn.
+
+-> SELECT * FROM OGRENCILER ORDER BY OgrenciAd ASC, O# DESC
+
+5) Adresi içinde "Van" kelimesi geçen öðrencileri listeleyin.
+
+-> SELECT * FROM OGRENCILER WHERE OgrenciAdres='%van%'

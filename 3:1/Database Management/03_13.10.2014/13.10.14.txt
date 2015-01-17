@@ -1,0 +1,14 @@
+TEDARIKCI(T#, TAdi, Statu, Sehir)
+TEDARIK(TID, PID, ProjeID, Miktar)
+PARCA(PID, PAdi, Renk, Agirlik, Sehir)
+PROJE(ProjeID, ProjeAdi, Sehir)
+
+Sorgular:
+1) Birden fazla tedarikçi tarafýndan tedarik edilen parça numaralarý.
+2) Tüm parçalarý tedarik eden tedarikçi adlarý
+3) P5 parçalarýný tedarik eden tedarikçi adlarý ve kullanýldýðý proje adlarý.
+4) Londra merkezli tüm tedarikçiler tarafýndan parça temin edilen proje numaralarý.
+5) Tedarik edilen yeþil renkli parçalarýn adlarý
+6) Ayný tedarikçi tarafýndan tedarik edilen parca adlarý
+7) P2 parçasýný tedarik eden tedarikçilerin bulunduðu þehirler.
+8) Tedarikçi, proje ve parçalarýn temin edildiði þehir adlarý ayný olup tedarikçiin adý geçe  parçayý yine adý geçen proje için tedarik ettið durumu saðlayan tedarikçi, parça ve proje adlarý
