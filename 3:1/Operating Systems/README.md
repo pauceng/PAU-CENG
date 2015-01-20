@@ -1,3 +1,3 @@
 
 #Operatin Systems
-####Slides and 2 turkish book included. Also included some OS apps
+####slaytlar ve uygulamaları içermektedir. ayrıca iki adet türkçe kitap bulunmaktadır.
